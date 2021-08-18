@@ -1,0 +1,51 @@
+﻿@model IEnumerable<havhavli.Models.Product>
+
+@{
+    ViewData["Title"] = "מוצרי החנות";
+}
+
+<h1>מוצרי החנות</h1>
+
+<p>
+    <a asp-action="Create">הוסף מוצר</a>
+</p>
+<div class="container">
+    <div class="row">
+        @foreach (var item in Model)
+        {
+            <div class="card col-3" style="width: 18rem;">
+                <img src="@item.Image" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">@item.Name</h5>
+                    <p class="card-text"> @item.Description</p>
+                    <p class="card-text"> @item.Price ש"ח</p>
+                    <a href="#" class="btn btn-primary">הוסף לסל הקניות</a>
+                </div>
+            </div>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+            @*
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Description)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Quantity)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Price)
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    </td>
+                </tr>
+            *@
+        }
+    </div>
+</div>
