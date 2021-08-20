@@ -41,6 +41,9 @@ namespace havhavli.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int?>("CategoryIdId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
@@ -58,28 +61,54 @@ namespace havhavli.Migrations
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
 
-                    b.Property<int?>("categoryId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("categoryId");
+                    b.HasIndex("CategoryIdId");
 
                     b.ToTable("Product");
                 });
 
+            modelBuilder.Entity("havhavli.Models.User", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("BirthDay")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("EmailAddress")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Type")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Username")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("User");
+                });
+
             modelBuilder.Entity("havhavli.Models.Product", b =>
                 {
-                    b.HasOne("havhavli.Models.Category", "category")
-                        .WithMany("Products")
-                        .HasForeignKey("categoryId");
+                    b.HasOne("havhavli.Models.Category", "CategoryId")
+                        .WithMany("products")
+                        .HasForeignKey("CategoryIdId");
 
-                    b.Navigation("category");
+                    b.Navigation("CategoryId");
                 });
 
             modelBuilder.Entity("havhavli.Models.Category", b =>
                 {
-                    b.Navigation("Products");
+                    b.Navigation("products");
                 });
 #pragma warning restore 612, 618
         }

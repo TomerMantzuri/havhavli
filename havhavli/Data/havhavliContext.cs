@@ -17,5 +17,7 @@ namespace havhavli.Data
         public DbSet<havhavli.Models.Product> Product { get; set; }
 
         public DbSet<havhavli.Models.Category> Category { get; set; }
+
+        public DbSet<havhavli.Models.User> User { get; set; }
     }
 }
