@@ -25,6 +25,7 @@ namespace havhavli.Models
         [Display(Name = "תמונה")]
         [DataType(DataType.ImageUrl)]
         public string Image { get; set; }
-        public Category category { get; set; }
+
+        public Category CategoryId { get; set; }
     }
 }
