@@ -15,21 +15,19 @@ namespace havhavli.Models
     public class User
     {
         public int Id { get; set; }
-
-        [Required]
+        [Required(ErrorMessage = "חובה להכניס שם משתמש")]
         [Display(Name = "שם משתמש")]
         public string Username { get; set; }
 
-        [Required]
-        //[Range(8,12,ErrorMessage ="אנא הכנס סיסמא בעלת 8-12 תווים")]
+        [Required(ErrorMessage ="חובה להכניס סיסמא")]
         [Display(Name ="סיסמא")]
         [DataType(DataType.Password)]
         public string Password { get; set; }
-       // [Required]
+      //  [Required(ErrorMessage ="אנא הכנס כתובת מייל")]
         [Display(Name = "אימייל")]
         [DataType(DataType.EmailAddress)]
         public string EmailAddress { get; set; }
-      //  [Required]
+       // [Required(ErrorMessage ="אנא הכנס תאריך לידה")]
         [Display(Name = "תאריך לידה")]
         [DataType(DataType.Date)]
         public string BirthDay { get; set; }

@@ -1,4 +1,5 @@
 ﻿using havhavli.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -23,10 +24,16 @@ namespace havhavli.Controllers
             return View();
         }
 
-        public IActionResult Privacy()
+        //[Authorize(Roles = "Admin")]
+        public IActionResult About()
         {
             return View();
         }
+        public IActionResult Contact()
+        {
+            return View();
+        }
+
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

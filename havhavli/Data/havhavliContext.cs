@@ -16,8 +16,13 @@ namespace havhavli.Data
 
         public DbSet<havhavli.Models.Product> Product { get; set; }
 
-        public DbSet<havhavli.Models.Category> Category { get; set; }
-
         public DbSet<havhavli.Models.User> User { get; set; }
+
+        public DbSet<havhavli.Models.category> category { get; set; }
+
+        public DbSet<havhavli.Models.Supplier> Supplier { get; set; }
+
+        public DbSet<havhavli.Models.Branch> Branch { get; set; }
+
     }
 }
