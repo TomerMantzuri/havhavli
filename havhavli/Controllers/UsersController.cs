@@ -24,10 +24,7 @@ namespace havhavli.Controllers
 
         public async Task<IActionResult> Logout()
         {
-            //HttpContext.Session.Clear();
-
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
-
             return RedirectToAction("Login");
         }
 
@@ -54,21 +51,19 @@ namespace havhavli.Controllers
                 var q = from u in _context.User
                         where u.Username == user.Username && u.Password == user.Password
                         select u;
-
-                // var q = _context.User.FirstOrDefault(u => u.Username == user.Username && u.Password == user.Password);
-
                 if (q.Count() > 0)
                 {
-                    // HttpContext.Session.SetString("username", q.First().Username);
-
                     Signin(q.First());
-
                     return RedirectToAction(nameof(Index), "Home");
                 }
                 else
                 {
-                    ViewData["Error"] = "Username and/or password are incorrect.";
+                    ViewData["Error"] = "שם משתמש ו/או סיסמא אינם נכונים";
                 }
+            }
+            else
+            {
+                ViewData["Error"] = "משתמש זה אינו קיים";
             }
             return View(user);
         }
@@ -84,17 +79,13 @@ namespace havhavli.Controllers
             var claimsIdentity = new ClaimsIdentity(
                 claims, CookieAuthenticationDefaults.AuthenticationScheme);
 
-            var authProperties = new AuthenticationProperties
-            {
-                //ExpiresUtc = DateTimeOffset.UtcNow.AddMinutes(10)
-            };
+            var authProperties = new AuthenticationProperties{};
 
             await HttpContext.SignInAsync(
                 CookieAuthenticationDefaults.AuthenticationScheme,
                 new ClaimsPrincipal(claimsIdentity),
                 authProperties);
         }
-
 
 
 

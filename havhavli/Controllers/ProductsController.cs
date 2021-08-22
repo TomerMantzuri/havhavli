@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using havhavli.Data;
 using havhavli.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace havhavli.Controllers
 {
@@ -22,30 +23,21 @@ namespace havhavli.Controllers
         // GET: Products
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Product.ToListAsync());
+            var havhavliContext = _context.Product.Include(p => p.category);
+            return View(await havhavliContext.ToListAsync());
         }
 
-        // GET: Products/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> Search(string query)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var product = await _context.Product
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (product == null)
-            {
-                return NotFound();
-            }
-
-            return View(product);
+            var havhavliContext = _context.Product.Include(a => a.category).Where(a => a.Name.Contains(query) || a.Description.Contains(query)||query==null || a.category.name.Equals(query));
+            return View("index",await havhavliContext.ToListAsync());
         }
 
         // GET: Products/Create
+        [Authorize(Roles = "Admin")]
         public IActionResult Create()
         {
+            ViewData["categoryId"] = new SelectList(_context.Set<category>(), "Id", "Id");
             return View();
         }
 
@@ -54,7 +46,7 @@ namespace havhavli.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Description,Quantity,Price,Image")] Product product)
+        public async Task<IActionResult> Create([Bind("Id,Name,Description,Quantity,Price,Image,categoryId")] Product product)
         {
             if (ModelState.IsValid)
             {
@@ -62,10 +54,12 @@ namespace havhavli.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["categoryId"] = new SelectList(_context.Set<category>(), "Id", "Id", product.categoryId);
             return View(product);
         }
 
         // GET: Products/Edit/5
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -78,7 +72,13 @@ namespace havhavli.Controllers
             {
                 return NotFound();
             }
+            ViewData["categoryId"] = new SelectList(_context.Set<category>(), "Id", "Id", product.categoryId);
             return View(product);
+        }
+
+        public IActionResult ShoppingList()
+        {
+            return View();
         }
 
         // POST: Products/Edit/5
@@ -86,7 +86,7 @@ namespace havhavli.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Description,Quantity,Price,Image")] Product product)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Description,Quantity,Price,Image,categoryId")] Product product)
         {
             if (id != product.Id)
             {
@@ -113,10 +113,12 @@ namespace havhavli.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["categoryId"] = new SelectList(_context.Set<category>(), "Id", "Id", product.categoryId);
             return View(product);
         }
 
         // GET: Products/Delete/5
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -125,6 +127,7 @@ namespace havhavli.Controllers
             }
 
             var product = await _context.Product
+                .Include(p => p.category)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (product == null)
             {

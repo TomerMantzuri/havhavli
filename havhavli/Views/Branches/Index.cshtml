@@ -1,0 +1,38 @@
+﻿@model IEnumerable<havhavli.Models.Branch>
+
+@{
+    ViewData["Title"] = "הסניפים שלנו";
+}
+
+<h1>הסניפים שלנו</h1>
+@if (Context.User.IsInRole("Admin"))
+{
+    <p>
+        <a asp-action="Create">הוסף סניף</a>
+    </p>
+}
+<div class="container">
+    <div class="row">
+        @foreach (var item in Model)
+        {
+            <div class="card col-3" style="width: 18rem;">
+                <div class="card-body">
+                    <h5 class="card-title">@item.Name</h5>
+                    <p class="card-text"> @item.Address</p>
+                    <p class="card-text"> @item.PhoneNumber</p>
+                    <p class="card-text"> @item.OpeningHours</p>
+                </div>
+                @if (Context.User.IsInRole("Admin"))
+                {
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.Id">ערוך פרטי סניף</a>
+                    </td>
+                    <td>
+                        <a asp-action="Delete" asp-route-id="@item.Id">מחיקת סניף מהרשימה</a>
+                    </td>
+                }
+            </div>
+
+        }
+    </div>
+</div>

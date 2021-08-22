@@ -5,10 +5,17 @@
 }
 
 <h1>מוצרי החנות</h1>
+@if (Context.User.IsInRole("Admin"))
+{
+    <p>
+        <a asp-action="Create">הוסף מוצר</a>
+    </p>
+}
 
-<p>
-    <a asp-action="Create">הוסף מוצר</a>
-</p>
+<form asp-action="Search">
+    <input name="query" id="query" autocomplete="off" placeholder="חיפוש..." />
+    <input type="submit" value="חיפוש" />
+</form>
 <div class="container">
     <div class="row">
         @foreach (var item in Model)
@@ -21,11 +28,18 @@
                     <p class="card-text"> @item.Price ש"ח</p>
                     <a href="#" class="btn btn-primary">הוסף לסל הקניות</a>
                 </div>
+                @if (Context.User.IsInRole("Admin"))
+                {
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.Id">ערוך מוצר</a>
+                    </td>
+                    <td>
+                        <a asp-action="Delete" asp-route-id="@item.Id">מחיקת מוצר</a>
+                    </td>
+                }
             </div>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
+
         }
     </div>
 </div>
+

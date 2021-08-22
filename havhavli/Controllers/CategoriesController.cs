@@ -7,54 +7,39 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using havhavli.Data;
 using havhavli.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace havhavli.Controllers
 {
-    public class CategoriesController : Controller
+    public class categoriesController : Controller
     {
         private readonly havhavliContext _context;
 
-        public CategoriesController(havhavliContext context)
+        public categoriesController(havhavliContext context)
         {
             _context = context;
         }
 
-        // GET: Categories
+        // GET: categories
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Category.ToListAsync());
+            return View(await _context.category.ToListAsync());
         }
 
-        // GET: Categories/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
 
-            var category = await _context.Category
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (category == null)
-            {
-                return NotFound();
-            }
-
-            return View(category);
-        }
-
-        // GET: Categories/Create
+        // GET: categories/Create
+        [Authorize(Roles = "Admin")]
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Categories/Create
+        // POST: categories/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name")] Category category)
+        public async Task<IActionResult> Create([Bind("Id,name")] category category)
         {
             if (ModelState.IsValid)
             {
@@ -65,7 +50,8 @@ namespace havhavli.Controllers
             return View(category);
         }
 
-        // GET: Categories/Edit/5
+        // GET: categories/Edit/5
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -73,7 +59,7 @@ namespace havhavli.Controllers
                 return NotFound();
             }
 
-            var category = await _context.Category.FindAsync(id);
+            var category = await _context.category.FindAsync(id);
             if (category == null)
             {
                 return NotFound();
@@ -81,12 +67,12 @@ namespace havhavli.Controllers
             return View(category);
         }
 
-        // POST: Categories/Edit/5
+        // POST: categories/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name")] Category category)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,name")] category category)
         {
             if (id != category.Id)
             {
@@ -102,7 +88,7 @@ namespace havhavli.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!CategoryExists(category.Id))
+                    if (!categoryExists(category.Id))
                     {
                         return NotFound();
                     }
@@ -116,7 +102,8 @@ namespace havhavli.Controllers
             return View(category);
         }
 
-        // GET: Categories/Delete/5
+        // GET: categories/Delete/5
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -124,7 +111,7 @@ namespace havhavli.Controllers
                 return NotFound();
             }
 
-            var category = await _context.Category
+            var category = await _context.category
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (category == null)
             {
@@ -134,20 +121,20 @@ namespace havhavli.Controllers
             return View(category);
         }
 
-        // POST: Categories/Delete/5
+        // POST: categories/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var category = await _context.Category.FindAsync(id);
-            _context.Category.Remove(category);
+            var category = await _context.category.FindAsync(id);
+            _context.category.Remove(category);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool CategoryExists(int id)
+        private bool categoryExists(int id)
         {
-            return _context.Category.Any(e => e.Id == id);
+            return _context.category.Any(e => e.Id == id);
         }
     }
 }

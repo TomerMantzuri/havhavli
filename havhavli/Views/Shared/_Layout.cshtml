@@ -1,17 +1,18 @@
 ﻿<!DOCTYPE html>
-<html lang="en">
+<html dir ="rtl" lang="he">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - havhavli</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
+
 </head>
 <body>
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">havhavli</a>
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">הב-הב לי</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -24,17 +25,27 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="About">אודות</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Products" asp-action="ShoppingList">סל קניות</a>
+                        </li>
                         @if (Context.User != null && Context.User.Claims != null && Context.User.Claims.Count() > 0)
                         {
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Users" asp-action="Logout">התנתק</a>
-                        </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Users" asp-action="Logout">התנתק</a>
+                            </li>
                         }
                         else
                         {
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Users" asp-action="Login">התחבר</a>
-                        </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Users" asp-action="Login">התחבר</a>
+                            </li>
+                        }
+
+                        @if (Context.User.IsInRole("Admin"))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Suppliers" asp-action="Index">ניהול ספקים</a>
+                            </li>
                         }
                     </ul>
                 </div>
@@ -49,7 +60,9 @@
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2021 - havhavli - <a asp-area="" asp-controller="Home" asp-action="About">אודות</a>
+            &copy; 2021 - הב-הב לי - <a asp-area="" asp-controller="Home" asp-action="About">אודות</a>  |
+            <a asp-area="" asp-controller="Branches" asp-action="Index">הסניפים שלנו</a> |
+            <a asp-area="" asp-controller="Home" asp-action="Contact">צור קשר</a>
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
