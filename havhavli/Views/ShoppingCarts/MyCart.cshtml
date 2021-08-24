@@ -1,0 +1,52 @@
+﻿@model havhavli.Models.ShoppingCart
+
+@{
+    ViewData["Title"] = "סל הקניות שלי";
+}
+<table class="table-striped styleTable">
+    <thead>
+        <tr>
+            <th></th>
+            <th>
+                <p>Products</p>
+            </th>
+            <th>
+                <p>Price</p>
+            </th>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Products)
+        {
+            <tr>
+                <td>
+                    <img src=@item.Image>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+
+                <td>
+                    <form asp-controller="Carts" asp-action="RemoveProduct" asp-route-id="@item.Id" method="post">
+                        <button class="btn btn-danger" type="submit">הסר</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.TotalPrice)
+            </th>
+            <th>
+                @Html.DisplayFor(model => model.TotalPrice)
+            </th>
+        </tr>
+    </thead>
+</table>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

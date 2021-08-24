@@ -27,6 +27,7 @@ namespace havhavli.Models
         public string Image { get; set; }
         public int categoryId { get; set; }
         public category category { get; set; }
+        public List<ShoppingCart> Carts { get; set; }
 
     }
 }

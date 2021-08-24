@@ -24,7 +24,6 @@ namespace havhavli.Controllers
         {
             return View(await _context.Supplier.ToListAsync());
         }
-
         // GET: Suppliers/Details/5
         public async Task<IActionResult> Details(int? id)
         {
