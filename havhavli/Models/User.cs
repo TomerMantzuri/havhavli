@@ -18,7 +18,6 @@ namespace havhavli.Models
         [Required(ErrorMessage = "חובה להכניס שם משתמש")]
         [Display(Name = "שם משתמש")]
         public string Username { get; set; }
-
         [Required(ErrorMessage ="חובה להכניס סיסמא")]
         [Display(Name ="סיסמא")]
         [DataType(DataType.Password)]
@@ -31,7 +30,7 @@ namespace havhavli.Models
         [Display(Name = "תאריך לידה")]
         [DataType(DataType.Date)]
         public string BirthDay { get; set; }
-
         public UserType Type { get; set; } = UserType.Client;
+        public ShoppingCart Cart { get; set; } = new ShoppingCart();
     }
 }

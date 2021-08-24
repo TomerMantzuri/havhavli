@@ -33,6 +33,21 @@ namespace havhavli.Migrations
                     b.ToTable("BranchSupplier");
                 });
 
+            modelBuilder.Entity("ProductShoppingCart", b =>
+                {
+                    b.Property<int>("CartsId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ProductsId")
+                        .HasColumnType("int");
+
+                    b.HasKey("CartsId", "ProductsId");
+
+                    b.HasIndex("ProductsId");
+
+                    b.ToTable("ProductShoppingCart");
+                });
+
             modelBuilder.Entity("havhavli.Models.Branch", b =>
                 {
                     b.Property<int>("Id")
@@ -95,6 +110,27 @@ namespace havhavli.Migrations
                     b.ToTable("Product");
                 });
 
+            modelBuilder.Entity("havhavli.Models.ShoppingCart", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<float>("TotalPrice")
+                        .HasColumnType("real");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId")
+                        .IsUnique();
+
+                    b.ToTable("ShoppingCart");
+                });
+
             modelBuilder.Entity("havhavli.Models.Supplier", b =>
                 {
                     b.Property<int>("Id")
@@ -117,6 +153,31 @@ namespace havhavli.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Supplier");
+                });
+
+            modelBuilder.Entity("havhavli.Models.SupplierProducts", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("InStock")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SupplierId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProductId");
+
+                    b.HasIndex("SupplierId");
+
+                    b.ToTable("SupplierProducts");
                 });
 
             modelBuilder.Entity("havhavli.Models.User", b =>
@@ -179,6 +240,21 @@ namespace havhavli.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("ProductShoppingCart", b =>
+                {
+                    b.HasOne("havhavli.Models.ShoppingCart", null)
+                        .WithMany()
+                        .HasForeignKey("CartsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("havhavli.Models.Product", null)
+                        .WithMany()
+                        .HasForeignKey("ProductsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("havhavli.Models.Product", b =>
                 {
                     b.HasOne("havhavli.Models.category", "category")
@@ -188,6 +264,46 @@ namespace havhavli.Migrations
                         .IsRequired();
 
                     b.Navigation("category");
+                });
+
+            modelBuilder.Entity("havhavli.Models.ShoppingCart", b =>
+                {
+                    b.HasOne("havhavli.Models.User", "User")
+                        .WithOne("Cart")
+                        .HasForeignKey("havhavli.Models.ShoppingCart", "UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("havhavli.Models.SupplierProducts", b =>
+                {
+                    b.HasOne("havhavli.Models.Product", "product")
+                        .WithMany()
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("havhavli.Models.Supplier", "supplier")
+                        .WithMany("supplierProducts")
+                        .HasForeignKey("SupplierId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("product");
+
+                    b.Navigation("supplier");
+                });
+
+            modelBuilder.Entity("havhavli.Models.Supplier", b =>
+                {
+                    b.Navigation("supplierProducts");
+                });
+
+            modelBuilder.Entity("havhavli.Models.User", b =>
+                {
+                    b.Navigation("Cart");
                 });
 
             modelBuilder.Entity("havhavli.Models.category", b =>

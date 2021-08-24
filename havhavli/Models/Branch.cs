@@ -10,6 +10,7 @@ namespace havhavli.Models
     {
         public int Id { get; set; }
         [Display(Name = "שם")]
+        [RegularExpression(@"^[א-ת ]+$", ErrorMessage = "שם הסניף חייב להיות בעברית בלבד ")]
         [Required]
         public string Name { get; set; }
         [Required]
@@ -18,6 +19,7 @@ namespace havhavli.Models
         public String PhoneNumber { get; set; }
         [Required]
         [Display(Name = "כתובת")]
+        [RegularExpression(@"^[א-ת ]+$", ErrorMessage = "כתובת הסניף חייב להיות בעברית בלבד ")]
         public String Address { get; set; }
         [Required]
         [Display(Name = "שעות פעילות")]

@@ -20,6 +20,8 @@ namespace havhavli.Models
         [Display(Name = "מספר טלפון")]
         public String Phone { get; set; }
         public List<Branch> Branchs { get; set; }
+        public List<SupplierProducts> supplierProducts { get; set; }
+
 
     }
 }
