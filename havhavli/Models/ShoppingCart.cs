@@ -12,6 +12,7 @@ namespace havhavli.Models
         public int UserId { get; set; }
         public User User { get; set; }
         [Required]
+        [Display(Name ="סך הכל ")]
         [DataType(DataType.Currency)]
         public float TotalPrice { get; set; } = 0;
         public List<Product> Products { get; set; }

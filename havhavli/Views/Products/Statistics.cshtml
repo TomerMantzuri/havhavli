@@ -1,0 +1,125 @@
+﻿@model IEnumerable<havhavli.Models.Product>
+
+@{
+    ViewBag.Title = "סטטיסטיקה";
+}
+
+<h1 class="font-weight-lighter text-light">סטטיסטיקת אתר</h1>
+<br />
+<br />
+<br />
+
+<div>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/data.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/modules/export-data.js"></script>
+    <div id="container" class="graph1"></div>
+
+    <br />
+    <br />
+    <br />
+    <table id="datatable" class="datatable">
+        <thead>
+            <tr>
+                <th></th>
+                <th>סטטיסטיקת מכירות</th>
+
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var item in ViewBag.ClientPurchase as ICollection<Statistic>)
+            {
+                <tr>
+                    <th>@item.Key</th>
+                    <th>@item.Values</th>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <script>
+        Highcharts.chart('container', {
+            data: {
+                table: 'datatable'
+            },
+            chart: {
+                type: 'column'
+            },
+            title: {
+                text: 'המוצר המבוקש ביותר'
+            },
+            yAxis: {
+                allowDecimals: false,
+                title: {
+                    text: 'כמות המוצרים בעגלות'
+                }
+            },
+            tooltip: {
+                formatter: function () {
+                    return '<b>' + this.series.name + '</b><br/>' +
+                        this.point.y + ' ' + this.point.name.toLowerCase();
+                }
+            }
+        });
+    </script>
+
+</div>
+
+
+<br />
+<br />
+
+<div>
+    <div id="ProductContainer" class="graph2"></div>
+
+    <br />
+    <br />
+    <br />
+    <table id="ProductDatatable" class="ProductDatatable">
+        <thead>
+            <tr>
+                <th></th>
+                <th>כמות המוצרים באתר</th>
+
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var item in ViewBag.CurrentTotalProducts as ICollection<Statistic>)
+            {
+                <tr>
+                    <th>@item.Key</th>
+                    <th>@item.Values</th>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <script>
+        Highcharts.chart('ProductContainer', {
+            data: {
+                table: 'ProductDatatable'
+            },
+            chart: {
+                type: 'pie'
+            },
+            title: {
+                text: 'חלוקת מוצרים על פי קטגוריות'
+            },
+            plotOptions: {
+                series: {
+                    dataLabels: {
+                        enabled: true,
+                        format: '{point.name}: {point.percentage:.1f} %'
+                    }
+                }
+            },
+            tooltip: {
+                headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
+                pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y:.2f}%</b> of total<br/>'
+            }
+        });
+    </script>
+</div>
