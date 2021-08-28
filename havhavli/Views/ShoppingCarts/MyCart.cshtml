@@ -29,7 +29,7 @@
                 </td>
 
                 <td>
-                    <form asp-controller="Carts" asp-action="RemoveProduct" asp-route-id="@item.Id" method="post">
+                    <form asp-controller="ShoppingCarts" asp-action="RemoveProduct" asp-route-id="@item.Id" method="post">
                         <button class="btn btn-danger" type="submit">הסר</button>
                     </form>
                 </td>
@@ -47,6 +47,114 @@
         </tr>
     </thead>
 </table>
+
+
+<button class="btn btn-success" data-toggle="modal" data-target="#pay">שלם</button>
+
+<div class="modal" id="pay" tabindex="-1" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="container" id="payment">
+        <div class="creditCardInfo">
+            <form>
+                <div class="cardholderName">
+                    <label>Card Number</label>
+                    <div class="cardholderName">
+                        <input id="CardNumber" type="number" required min="1000000000000000" max="9999999999999999" />
+                    </div>
+                    <div name="validation"></div>
+                    <div class="cardholderName">
+                        <label>Cardholder Name</label>
+                        <input id="CardHolder" type="text" required min="1" max="16" />
+                    </div>
+                </div>
+
+                <div class="details">
+                    <div class="exp">
+                        <label>Expiry Date</label>
+                        <div id="sami">
+                            <select id="exp">
+                                <option>
+                                    Jan
+                                </option>
+                                <option>
+                                    Feb
+                                </option>
+                                <option>
+                                    Mar
+                                </option>
+                                <option>
+                                    Apr
+                                </option>
+                                <option>
+                                    May
+                                </option>
+                                <option>
+                                    Jun
+                                </option>
+                                <option>
+                                    Jul
+                                </option>
+                                <option>
+                                    Aug
+                                </option>
+                                <option>
+                                    Sep
+                                </option>
+                                <option>
+                                    Oct
+                                </option>
+                                <option>
+                                    Nov
+                                </option>
+                                <option>
+                                    Dec
+                                </option>
+                            </select>
+                            <select>
+                                <option>
+                                    2022
+                                </option>
+                                <option>
+                                    2023
+                                </option>
+                                <option>
+                                    2024
+                                </option>
+                                <option>
+                                    2025
+                                </option>
+                                <option>
+                                    2026
+                                </option>
+                                <option>
+                                    2027
+                                </option>
+                                <option>
+                                    2028
+                                </option>
+                                <option>
+                                    2029
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="cvv">
+                    <label>CCV</label>
+                    <div id="sami">
+                        <input id="ccv" type="number" required min="100" max="999" />
+                    </div>
+                </div>
+                <hr />
+                <div class="submitBtn">
+                    <input class="btn btn-success" value="Pay" type="submit" asp-controller="ShoppingCarts" asp-action="AfterPayment" />
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

@@ -39,6 +39,7 @@ namespace havhavli.Controllers
         }
 
         // GET: ShoppingCarts/Details/5
+        [Authorize]
         public async Task<IActionResult> Details(int? id)
         {
             try
@@ -64,6 +65,7 @@ namespace havhavli.Controllers
         }
 
         // GET: ShoppingCarts/Edit/5
+        [Authorize]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -117,6 +119,7 @@ namespace havhavli.Controllers
         }
 
         // GET: ShoppingCarts/Delete/5
+        [Authorize]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -138,6 +141,7 @@ namespace havhavli.Controllers
         // POST: ShoppingCarts/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var cart = await _context.ShoppingCart
@@ -155,7 +159,7 @@ namespace havhavli.Controllers
         {
             return _context.ShoppingCart.Any(e => e.Id == id);
         }
-
+       [Authorize]
         public IActionResult MyCart()
         {
             String userName = HttpContext.User.Identity.Name;
@@ -201,6 +205,7 @@ namespace havhavli.Controllers
         // POST: Carts/removeProduct/5
         [HttpPost, ActionName("RemoveProduct")]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<IActionResult> RemoveProduct(int id)
         {
             Product product = _context.Product.FirstOrDefault(x => x.Id == id);
