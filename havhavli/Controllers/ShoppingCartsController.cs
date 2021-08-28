@@ -38,9 +38,21 @@ namespace havhavli.Controllers
             catch { return RedirectToAction("PageNotFound", "Home"); }
         }
 
-       
-        // GET: ShoppingCarts/Edit/5
         [Authorize]
+        public IActionResult Search(string query)
+        {
+            String userName = User.Identity.Name;
+            User user = _context.User.FirstOrDefault(x => x.Username == userName);
+            ShoppingCart cart = _context.ShoppingCart.Include(db => db.Products).FirstOrDefault(x => x.UserId == user.Id);
+            if (query == null)
+                return View("MyCart", cart);
+            List<Product> products = cart.Products.Where(a => a.Name.Contains(query) || a.Description.Contains(query)).ToList();
+            cart.Products = products;
+            return View("MyCart", cart);
+        }
+
+                // GET: ShoppingCarts/Edit/5
+                [Authorize]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -174,7 +186,7 @@ namespace havhavli.Controllers
                 _context.Update(product);
                 await _context.SaveChangesAsync();
             }
-            return RedirectToAction(nameof(MyCart));
+            return RedirectToAction("Index", "Products");
         }
 
         // POST: Carts/removeProduct/5

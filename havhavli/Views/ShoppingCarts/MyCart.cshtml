@@ -3,6 +3,12 @@
 @{
     ViewData["Title"] = "סל הקניות שלי";
 }
+
+<form asp-action="Search">
+    <input name="query" placeholder="חפש מוצר" />
+    <input type="submit" value="חפש" class="btn btn-primary" />
+</form>
+
 <table class="table-striped styleTable">
     <thead>
         <tr>

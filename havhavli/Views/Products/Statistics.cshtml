@@ -14,65 +14,8 @@
     <script src="https://code.highcharts.com/modules/data.js"></script>
     <script src="https://code.highcharts.com/modules/exporting.js"></script>
     <script src="https://code.highcharts.com/modules/export-data.js"></script>
-    <div id="container" class="graph1"></div>
 
-    <br />
-    <br />
-    <br />
-    <table id="datatable" class="datatable">
-        <thead>
-            <tr>
-                <th></th>
-                <th>סטטיסטיקת מכירות</th>
-
-            </tr>
-        </thead>
-
-        <tbody>
-            @foreach (var item in ViewBag.ClientPurchase as ICollection<Statistic>)
-            {
-                <tr>
-                    <th>@item.Key</th>
-                    <th>@item.Values</th>
-                </tr>
-            }
-        </tbody>
-    </table>
-
-    <script>
-        Highcharts.chart('container', {
-            data: {
-                table: 'datatable'
-            },
-            chart: {
-                type: 'column'
-            },
-            title: {
-                text: 'המוצר המבוקש ביותר'
-            },
-            yAxis: {
-                allowDecimals: false,
-                title: {
-                    text: 'כמות המוצרים בעגלות'
-                }
-            },
-            tooltip: {
-                formatter: function () {
-                    return '<b>' + this.series.name + '</b><br/>' +
-                        this.point.y + ' ' + this.point.name.toLowerCase();
-                }
-            }
-        });
-    </script>
-
-</div>
-
-
-<br />
-<br />
-
-<div>
-    <div id="ProductContainer" class="graph2"></div>
+    <div id="ProductContainer" class="graph1"></div>
 
     <br />
     <br />
@@ -122,4 +65,58 @@
             }
         });
     </script>
+
+
+    <div id="container" class="graph2"></div>
+
+    <br />
+    <br />
+    <br />
+
+    <table id="datatable" class="datatable">
+        <thead>
+            <tr>
+                <th></th>
+                <th>סטטיסטיקת מכירות</th>
+
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var item in ViewBag.ClientPurchase as ICollection<Statistic>)
+            {
+                <tr>
+                    <th>@item.Key</th>
+                    <th>@item.Values</th>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <script>
+        Highcharts.chart('container', {
+            data: {
+                table: 'datatable'
+            },
+            chart: {
+                type: 'column'
+            },
+            title: {
+                text: 'המוצר המבוקש ביותר'
+            },
+            yAxis: {
+                allowDecimals: false,
+                title: {
+                    text: 'כמות המוצרים בעגלות'
+                }
+            },
+            tooltip: {
+                formatter: function () {
+                    return '<b>' + this.series.name + '</b><br/>' +
+                        this.point.y + ' ' + this.point.name.toLowerCase();
+                }
+            }
+        });
+    </script>
+
 </div>

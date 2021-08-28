@@ -9,6 +9,12 @@
 <p>
     <a asp-action="Create">צור קטגוריה חדשה</a>
 </p>
+
+
+<form asp-action="Search">
+    <input name="query" id="query" autocomplete="off" placeholder="חיפוש..." />
+    <input type="submit" value="חיפוש" />
+</form>
 <table class="table">
     <thead>
         <tr>
@@ -19,16 +25,36 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.name)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">עריכת קטגוריה</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">מחיקת קטגוריה</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.name)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">עריכת קטגוריה</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">מחיקת קטגוריה</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
+
+@section Scripts{
+    <script src="~/js/Search.js"></script>
+
+    <script type="text/html" id="hidden-template">
+        <tr>
+            <td>
+                {name}
+            </td>
+            <td>
+                {Description}
+            </td>
+            <td>
+                <a href="/Products/Edit/{id}">Edit</a> |
+                <a href="/Products/Delete/{id}">Delete</a>
+            </td>
+        </tr>
+    </script>
+}
