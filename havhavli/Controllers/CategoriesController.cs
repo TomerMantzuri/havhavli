@@ -26,6 +26,12 @@ namespace havhavli.Controllers
             return View(await _context.category.ToListAsync());
         }
 
+        public async Task<IActionResult> Search(string query)
+        {
+            var havhavliContext = _context.Product.Include(a => a.category).Where(a => a.Name.Contains(query) || query == null);
+            return Json("index", await havhavliContext.ToListAsync());
+        }
+
 
         // GET: categories/Create
         [Authorize(Roles = "Admin")]
