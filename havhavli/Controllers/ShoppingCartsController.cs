@@ -38,32 +38,7 @@ namespace havhavli.Controllers
             catch { return RedirectToAction("PageNotFound", "Home"); }
         }
 
-        // GET: ShoppingCarts/Details/5
-        [Authorize]
-        public async Task<IActionResult> Details(int? id)
-        {
-            try
-            {
-                if (id == null)
-                {
-                    return RedirectToAction("PageNotFound", "Home");
-                }
-
-                var cart = await _context.ShoppingCart
-                    .Include(c => c.User)
-                    .Include(p => p.Products)
-                    .FirstOrDefaultAsync(m => m.Id == id);
-                if (cart == null)
-                {
-                    return RedirectToAction("PageNotFound", "Home");
-                }
-                cart.User = _context.User.FirstOrDefault(u => u.Id == cart.UserId);
-
-                return View(cart);
-            }
-            catch { return RedirectToAction("PageNotFound", "Home"); }
-        }
-
+       
         // GET: ShoppingCarts/Edit/5
         [Authorize]
         public async Task<IActionResult> Edit(int? id)
@@ -112,7 +87,7 @@ namespace havhavli.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(MyCart));
             }
             ViewData["UserId"] = new SelectList(_context.User, "Id", "Password", shoppingCart.UserId);
             return View(shoppingCart);
@@ -236,6 +211,11 @@ namespace havhavli.Controllers
                 return RedirectToAction("PageNotFound", "Home");
             }
             ShoppingCart cart = _context.ShoppingCart.Include(db => db.Products).FirstOrDefault(x => x.UserId == user.Id);
+            foreach(var item in cart.Products)
+            {
+                item.Quantity--;
+                _context.Update(item);
+            }
             int i = cart.Products.RemoveAll(p => p.Id == p.Id);
             cart.TotalPrice = 0;
 

@@ -6,35 +6,35 @@
 <table class="table-striped styleTable">
     <thead>
         <tr>
-            <th></th>
+            <th><p>תמונה</p></th>
             <th>
-                <p>Products</p>
+                <p>מוצר</p>
             </th>
             <th>
-                <p>Price</p>
+                <p>מחיר</p>
             </th>
-    </thead>
+</thead>
     <tbody>
         @foreach (var item in Model.Products)
         {
-            <tr>
-                <td>
-                    <img src=@item.Image>
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Name)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Price)
-                </td>
-
-                <td>
-                    <form asp-controller="ShoppingCarts" asp-action="RemoveProduct" asp-route-id="@item.Id" method="post">
-                        <button class="btn btn-danger" type="submit">הסר</button>
-                    </form>
-                </td>
-            </tr>
+        <tr>
+            <td>
+                <img src=@item.Image>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                <form asp-controller="ShoppingCarts" asp-action="RemoveProduct" asp-route-id="@item.Id" method="post">
+                    <button class="btn btn-danger" type="submit">הסר</button>
+                </form>
+            </td>
+        </tr>
         }
+
     </tbody>
     <thead>
         <tr>
@@ -48,9 +48,10 @@
     </thead>
 </table>
 
-
+@if (Model.Products.Count > 0)
+{
 <button class="btn btn-success" data-toggle="modal" data-target="#pay">שלם</button>
-
+}
 <div class="modal" id="pay" tabindex="-1" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="container" id="payment">
         <div class="creditCardInfo">

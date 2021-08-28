@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using havhavli.Data;
 using havhavli.Models;
 using Microsoft.AspNetCore.Authorization;
+using System.Collections.ObjectModel;
 
 namespace havhavli.Controllers
 {
@@ -37,7 +38,7 @@ namespace havhavli.Controllers
         [Authorize(Roles = "Admin")]
         public IActionResult Create()
         {
-            ViewData["categoryId"] = new SelectList(_context.Set<category>(), "Id", "Id");
+            ViewData["categoryId"] = new SelectList(_context.Set<category>(), "Id", "name");
             return View();
         }
 
@@ -93,11 +94,6 @@ namespace havhavli.Controllers
             }
             ViewData["categoryId"] = new SelectList(_context.Set<category>(), "Id", "Id", product.categoryId);
             return View(product);
-        }
-
-        public IActionResult ShoppingList()
-        {
-            return View();
         }
 
         // POST: Products/Edit/5
@@ -171,5 +167,52 @@ namespace havhavli.Controllers
         {
             return _context.Product.Any(e => e.Id == id);
         }
+
+        [HttpGet]
+        [Authorize(Roles = "Admin")]
+        public ActionResult Statistics()
+        {
+                ICollection<Statistic> ClientStatistic = new Collection<Statistic>();
+                var ClientData = from p in _context.Product.Include(o => o.Carts)
+                             where (p.Carts.Count) > 0
+                             orderby (p.Carts.Count) descending
+                             select p;
+                foreach (var item in ClientData)
+                {
+                ClientStatistic.Add(new Statistic(item.Name, item.Carts.Count()));
+                }
+                ViewBag.ClientPurchase = ClientStatistic;
+
+
+                ICollection<Statistic> ProductStatistics = new Collection<Statistic>();
+                List<Product> products = _context.Product.ToList();
+                List<category> categories = _context.category.ToList();
+                var ProductData = from product in products
+                              join category in categories on product.categoryId equals category.Id
+                              group category by category.Id into G
+                              select new { id = G.Key, num = G.Count() };
+
+                var CalcStatic = from producct in ProductData
+                             join cate in categories on producct.id equals cate.Id
+                             select new { category = cate.name, count = producct.num };
+                foreach (var item in CalcStatic)
+                {
+                    if (item.count > 0)
+                    ProductStatistics.Add(new Statistic(item.category, item.count));
+                }
+                ViewBag.CurrentTotalProducts = ProductStatistics;
+                return View();
+        }
+    }
+}
+
+public class Statistic
+{
+    public string Key;
+    public int Values;
+    public Statistic(string key, int values)
+    {
+        Key = key;
+        Values = values;
     }
 }
