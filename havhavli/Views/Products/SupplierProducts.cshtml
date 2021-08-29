@@ -1,0 +1,25 @@
+﻿@model IEnumerable<havhavli.Models.Product>
+
+<h1>מוצרי הספק</h1>
+
+<div class="container">
+    <div class="row">
+        @foreach (var item in Model)
+        {
+            <div class="card col-2" style="width: 18rem;">
+                <img src="@item.Image" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">@item.Name</h5>
+                    <p class="card-text"> @item.Description</p>
+                    <p class="card-text"> @item.Price ש"ח</p>
+                </div>
+                <h2>ספק: @item.supplier.Name</h2>
+                <br />
+                <div>
+                    <a asp-action="Edit" asp-route-id="@item.Id">עריכת מוצר</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">מחיקת מוצר</a>
+                </div>
+            </div>
+        }
+    </div>
+</div>

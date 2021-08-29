@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<havhavli.Models.category>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "קטגוריות";
 }
 
 <h1>קטגוריות</h1>
@@ -27,15 +27,15 @@
     <tbody>
         @foreach (var item in Model)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.name)
-                </td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id">עריכת קטגוריה</a> |
-                    <a asp-action="Delete" asp-route-id="@item.Id">מחיקת קטגוריה</a>
-                </td>
-            </tr>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.name)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">עריכת קטגוריה</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">מחיקת קטגוריה</a>
+            </td>
+        </tr>
         }
     </tbody>
 </table>
