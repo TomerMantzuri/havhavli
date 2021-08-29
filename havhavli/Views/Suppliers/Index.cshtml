@@ -37,9 +37,9 @@
                 @Html.DisplayFor(modelItem => item.Phone)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">עריכת פרטי ספק</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">פרטים</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">מחק ספק מהרשימה</a>
+                <a asp-controller="Products" asp-action="SupplierProducts" asp-route-id="@item.Id">מוצרים</a> |
+                <a asp-action="Edit" asp-route-id="@item.Id">ערוך פרטי ספק</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">הסר ספק</a>
             </td>
         </tr>
 }

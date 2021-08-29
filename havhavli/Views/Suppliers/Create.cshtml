@@ -1,11 +1,12 @@
 ﻿@model havhavli.Models.Supplier
 
 @{
-    ViewData["Title"] = "צור ספק חדש";
+    ViewData["Title"] = "הוסף ספק";
 }
 
-<h1>יצרת ספק חדש</h1>
+<h1>הוספק סםק</h1>
 
+<h4>פרטי ספק</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -27,14 +28,14 @@
                 <span asp-validation-for="Phone" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="צור ספק" class="btn btn-primary" />
+                <input type="submit" value="Create" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">חזור אל רשימת הספקים</a>
+    <a asp-action="Index">חזור לרשימת ספקים</a>
 </div>
 
 @section Scripts {

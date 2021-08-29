@@ -17,9 +17,9 @@
                         <div class="carousel-inner">
                             <div class="carousel-item active">
                                 <img src="~/pics/dog.jpeg" />
-                                <div class="carousel-caption d-none d-md-block" onclick="window.location.href = 'https://localhost:44311/Products';">
+                                <div class="carousel-caption d-none d-md-block" onclick="window.location.href = 'https://localhost:44311/Products/Category/1';">
                                     <button class="sliderUpperMiddle btn" id="sliderBtn" type="button">
-                                        <h3>כלבים</h3>
+                                        <h3 class="text-white">מוצרים לכלבים</h3>
                                     </button>
                                 </div>
                             </div>
@@ -31,9 +31,9 @@
                         <div class="carousel-inner">
                             <div class="carousel-item active">
                                 <img src="~/pics/cat.jpeg" />
-                                <div class="carousel-caption d-none d-md-block" onclick="window.location.href = 'https://localhost:44311/Products';">
+                                <div class="carousel-caption d-none d-md-block" onclick="window.location.href = 'https://localhost:44311/Products/Category/2';">
                                     <button class="sliderUpperMiddle btn" id="sliderBtn" type="button">
-                                        <h3>חתולים</h3>
+                                        <h3 class="text-white">מוצרים לחתולים</h3>
                                     </button>
                                 </div>
                             </div>
@@ -45,9 +45,9 @@
                         <div class="carousel-inner">
                             <div class="carousel-item active">
                                 <img src="~/pics/fish.jpeg" />
-                                <div class="carousel-caption d-none d-md-block" onclick="window.location.href = 'https://localhost:44311/Products';">
+                                <div class="carousel-caption d-none d-md-block" onclick="window.location.href = 'https://localhost:44311/Products/Category/3';">
                                     <button class="sliderUpperMiddle btn" id="sliderBtn" type="button">
-                                        <h3 class="visually-hidden">דגים</h3>
+                                        <h3 class="text-white" >מוצרים לדגים</h3>
                                     </button>
                                 </div>
                             </div>
@@ -61,13 +61,10 @@
 
 
         <div class="container marketing">
-            <!-- START THE FEATURETTES -->
-
             <hr class="featurette-divider">
-
             <div class="video-container">
                 <h1>חדש בחנות ! בונזו בשר המכיל אומגה 3 במיוחד לכלב שלך🐶</h1>
-                <video width="400" height="350" autoplay controls>
+                <video width="400" height="350" controls >
                     <source src="~/video/main-video.mp4" type="video/mp4">
                     Your browser does not support the video tag.
                 </video>
@@ -80,7 +77,7 @@
                     <h2 class="featurette-heading">רק רגע!</h2>
                     <p class="lead"> השקיעו דקה מזמנכם ולמדו שיעור חשוב על הרגלי תזונה עבור הכלב שלכם</p>
                 </div>
-                <video width="400" height="400" autoplay controls>
+                <video width="400" height="400" controls>
                     <source src="~/video/It's all about Dogs.mp4" type="video/mp4">
                     Your browser does not support the video tag.
                 </video>
@@ -99,9 +96,6 @@
                 !function (d, s, id) { var js, fjs = d.getElementsByTagName(s)[0]; if (!d.getElementById(id)) { js = d.createElement(s); js.id = id; js.src = 'https://weatherwidget.io/js/widget.min.js'; fjs.parentNode.insertBefore(js, fjs); } }(document, 'script', 'weatherwidget-io-js');
             </script>
             <br />
-
-            <!-- /END THE FEATURETTES -->
-
-        </div><!-- /.container -->
+        </div>
     </main>
 <</body>
