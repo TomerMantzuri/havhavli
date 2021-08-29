@@ -25,8 +25,6 @@ namespace havhavli.Controllers
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Index()
         {
-            try
-            {
                 List<ShoppingCart> havhavliDBContext = _context.ShoppingCart.Include(c => c.User).Include(a => a.Products).ToList();
 
                 foreach (ShoppingCart cart in havhavliDBContext)
@@ -34,8 +32,6 @@ namespace havhavli.Controllers
                     cart.User = _context.User.FirstOrDefault(u => u.Id == cart.UserId);
                 }
                 return View(havhavliDBContext);
-            }
-            catch { return RedirectToAction("PageNotFound", "Home"); }
         }
 
         [Authorize]
@@ -51,8 +47,8 @@ namespace havhavli.Controllers
             return View("MyCart", cart);
         }
 
-                // GET: ShoppingCarts/Edit/5
-                [Authorize]
+        // GET: ShoppingCarts/Edit/5
+        [Authorize]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -163,7 +159,7 @@ namespace havhavli.Controllers
         [HttpPost, ActionName("AddToCart")]
         [ValidateAntiForgeryToken]
         [Authorize]
-        public async Task<IActionResult> AddToCart(int id)
+        public async Task<IActionResult> AddToCart(int id,int quantity)
         {
             Product product = _context.Product.Include(db => db.Carts).FirstOrDefault(x => x.Id == id);
             String userName = HttpContext.User.Identity.Name;
@@ -179,9 +175,10 @@ namespace havhavli.Controllers
 
             if (!(cart.Products.Contains(product) && product.Carts.Contains(cart)))
             {
-                user.Cart.Products.Add(product);
+                user.Cart.Products.AddRange(Enumerable.Repeat(product, quantity));
+             //   user.Cart.Products.Add(product);
                 product.Carts.Add(cart);
-                user.Cart.TotalPrice += product.Price;
+                user.Cart.TotalPrice += product.Price * quantity;
                 _context.Update(cart);
                 _context.Update(product);
                 await _context.SaveChangesAsync();

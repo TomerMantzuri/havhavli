@@ -1,8 +1,8 @@
-﻿@{
+﻿<!DOCTYPE html>
+@{
     ViewData["Title"] = "אודות";
 }
-<h1>@ViewData["הב-הב לי"]</h1>
-
+</div>
 <p>חנות הב-הב לי הינה חיות למוצרים עבור בעלי חיים כגון כלבים,חתולים ועוד.........</p>
 
 <p>
@@ -45,11 +45,37 @@
 
     <hr class="featurette-divider">
     טלפון ראשי: 1700-542-213
-</p>
+    <html>
+    <head>
+        <title>loadmapwithoptionsHTML</title>
+        <meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
+        <style type='text/css'>
+            body {
+                margin: 0;
+                padding: 0;
+                overflow: hidden;
+                font-family: 'Segoe UI',Helvetica,Arial,Sans-Serif
+            }
+        </style>
+    </head>
+    <body>
+        <div id='printoutPanel'></div>
 
-    @*https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3384.6900954119606!2d34.77224248575843!3d31.969303132036828!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1502b3f69a0c1b27%3A0x9df60473d5201ec3!2z15DXnNeZINeV15nXltecIDEwLCDXqNeQ16nXldefINec16bXmdeV158!5e0!3m2!1siw!2sil!4v1627570605134!5m2!1siw!2sil*@
-<div>
-    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3383.8752521019524!2d34.77643068535673!3d31.99139703093341!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1502b47f95fcdd09%3A0xaac254158c3ee7ab!2z16fXoNeZ15XXnyDXlNeW15TXkQ!5e0!3m2!1siw!2sil!4v1630166382237!5m2!1siw!2sil" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
-    <br />
-    <br />
-</div>
+        <div id='myMap' style='width: 30vw; height: 30vh;'></div>
+        <script type='text/javascript'>
+            function loadMapScenario() {
+                var map = new Microsoft.Maps.Map(document.getElementById('myMap'), {
+                    showSearchBar: true,
+                    center: new Microsoft.Maps.Location(31.990314, 34.774776),
+                    mapTypeId: Microsoft.Maps.MapTypeId.road,
+                    zoom: 15
+                });
+                var pushpin = new Microsoft.Maps.Pushpin(map.getCenter(), null);
+                map.entities.push(pushpin);
+
+            }
+        </script>
+        <script type='text/javascript' src='https://www.bing.com/api/maps/mapcontrol?key=AmAaHqIQVXR-3jbhbla3oVe1pS6q5tDVMtnCtTNyzD13C9FXAOCRvGVIay3wXXsu&callback=loadMapScenario' async defer></script>
+    </body>
+</html>
+
