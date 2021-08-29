@@ -73,6 +73,7 @@ body {
     font-family: 'Assistant';
     color: #000000;
     font-weight: bold;
+    padding-right: 5px;
 }
 .footer {
     position: absolute;
@@ -93,4 +94,22 @@ body {
 .navbar-nav {
     display: flex;
     justify-content: space-evenly;
+}
+.main-vid1 {
+    height: auto;
+}
+.main-vid2 {
+    height: auto;
+    margin-right: 15px;
+}
+.lead {
+    color: white;
+}
+.product_to_delete {
+    background: white;
+    width: fit-content;
+    text-align: center;
+}
+.col-sm-2{
+    font-weight: 900;
 }

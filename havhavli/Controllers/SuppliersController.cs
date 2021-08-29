@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using havhavli.Data;
 using havhavli.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace havhavli.Controllers
 {
@@ -20,28 +21,12 @@ namespace havhavli.Controllers
         }
 
         // GET: Suppliers
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Index()
         {
             return View(await _context.Supplier.ToListAsync());
         }
-        // GET: Suppliers/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var supplier = await _context.Supplier
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (supplier == null)
-            {
-                return NotFound();
-            }
-
-            return View(supplier);
-        }
-
+        [Authorize(Roles = "Admin")]
         // GET: Suppliers/Create
         public IActionResult Create()
         {
@@ -65,6 +50,7 @@ namespace havhavli.Controllers
         }
 
         // GET: Suppliers/Edit/5
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -116,6 +102,7 @@ namespace havhavli.Controllers
         }
 
         // GET: Suppliers/Delete/5
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)

@@ -9,7 +9,7 @@ namespace havhavli.Data
 {
     public class havhavliContext : DbContext
     {
-        public havhavliContext (DbContextOptions<havhavliContext> options)
+        public havhavliContext(DbContextOptions<havhavliContext> options)
             : base(options)
         {
         }
@@ -23,8 +23,6 @@ namespace havhavli.Data
         public DbSet<havhavli.Models.Supplier> Supplier { get; set; }
 
         public DbSet<havhavli.Models.Branch> Branch { get; set; }
-
-        public DbSet<havhavli.Models.SupplierProducts> SupplierProducts { get; set; }
 
         public DbSet<havhavli.Models.ShoppingCart> ShoppingCart { get; set; }
 
