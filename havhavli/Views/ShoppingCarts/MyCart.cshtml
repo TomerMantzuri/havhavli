@@ -19,26 +19,39 @@
             <th>
                 <p>מחיר</p>
             </th>
-    </thead>
+            <th>
+                <p>כמות</p>
+            </th>
+</thead>
     <tbody>
         @foreach (var item in Model.Products)
         {
-            <tr>
-                <td>
-                    <img src=@item.Image>
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Name)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Price)
-                </td>
-                <td>
-                    <form asp-controller="ShoppingCarts" asp-action="RemoveProduct" asp-route-id="@item.Id" method="post">
-                        <button class="btn btn-danger" type="submit">הסר</button>
-                    </form>
-                </td>
-            </tr>
+        <tr>
+            <td>
+                <img src=@item.Image>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                <p class="card-text">@Model.Products.Where(a => a == item).Count()</p>
+            </td>
+            <td>
+                <form asp-controller="ShoppingCarts" asp-action="AddToCart" asp-route-id="@item.Id"  method="post">
+                    <label for="quantity">כמות:</label>
+                    <input type="number" id="quantity" name="quantity" min="1" max="5" value="1" >
+                    <input type="submit" value="עדכן כמות">
+                </form>
+            </td>
+            <td>
+                <form asp-controller="ShoppingCarts" asp-action="RemoveProduct" asp-route-id="@item.Id" method="post">
+                    <button class="btn btn-danger" type="submit">הסר</button>
+                </form>
+            </td>
+        </tr>
         }
 
     </tbody>
