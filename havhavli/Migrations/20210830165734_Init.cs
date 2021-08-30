@@ -2,7 +2,7 @@
 
 namespace havhavli.Migrations
 {
-    public partial class FixSuppliers : Migration
+    public partial class Init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -103,7 +103,8 @@ namespace havhavli.Migrations
                     Price = table.Column<float>(type: "real", nullable: false),
                     Image = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     categoryId = table.Column<int>(type: "int", nullable: false),
-                    SupplierID = table.Column<int>(type: "int", nullable: false)
+                    SupplierID = table.Column<int>(type: "int", nullable: false),
+                    QuantityInCart = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {

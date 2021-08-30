@@ -9,8 +9,8 @@ using havhavli.Data;
 namespace havhavli.Migrations
 {
     [DbContext(typeof(havhavliContext))]
-    [Migration("20210830073832_FixQuantity")]
-    partial class FixQuantity
+    [Migration("20210830165734_Init")]
+    partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -102,6 +102,9 @@ namespace havhavli.Migrations
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
 
+                    b.Property<int>("QuantityInCart")
+                        .HasColumnType("int");
+
                     b.Property<int>("SupplierID")
                         .HasColumnType("int");
 
@@ -123,9 +126,6 @@ namespace havhavli.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("ProductQuantity")
-                        .HasColumnType("int");
 
                     b.Property<float>("TotalPrice")
                         .HasColumnType("real");

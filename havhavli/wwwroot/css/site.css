@@ -72,6 +72,7 @@ body {
     background-image: url('../pics/background.png');
     background-repeat: no-repeat;
     background-size: cover;
+    background-position: center;
     font-family: 'Assistant';
     color: #000000;
     font-weight: bold;
@@ -91,6 +92,7 @@ body {
 .container {
     padding-left: 0;
     margin-right: unset;
+    max-width:100%;
 }
 
 .navbar-nav {
@@ -105,7 +107,8 @@ body {
     margin-right: 15px;
 }
 .lead {
-    color: white;
+    color: rgb(0 0 0 / 90%);
+    font-weight: bold;
 }
 .product_to_delete {
     background: white;
@@ -114,4 +117,16 @@ body {
 }
 .col-sm-2{
     font-weight: 900;
+}
+
+.table-striped styleTable {
+display: flex;
+justify-content: space-between;
+align-items: center;
+width: 800px;
+}
+
+.container-categories {
+    display: flex;
+    justify-content: center;
 }
