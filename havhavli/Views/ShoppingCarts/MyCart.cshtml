@@ -19,6 +19,9 @@
             <th>
                 <p>מחיר</p>
             </th>
+            <th>
+                <p>כמות</p>
+            </th>
 </thead>
     <tbody>
         @foreach (var item in Model.Products)
@@ -32,6 +35,16 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                <p class="card-text">@Model.Products.Where(a => a == item).Count()</p>
+            </td>
+            <td>
+                <form asp-controller="ShoppingCarts" asp-action="AddToCart" asp-route-id="@item.Id"  method="post">
+                    <label for="quantity">כמות:</label>
+                    <input type="number" id="quantity" name="quantity" min="1" max="5" value="1" >
+                    <input type="submit" value="עדכן כמות">
+                </form>
             </td>
             <td>
                 <form asp-controller="ShoppingCarts" asp-action="RemoveProduct" asp-route-id="@item.Id" method="post">
@@ -56,7 +69,7 @@
 
 @if (Model.Products.Count > 0)
 {
-<button class="btn btn-success" data-toggle="modal" data-target="#pay">שלם</button>
+    <button class="btn btn-success" data-toggle="modal" data-target="#pay">שלם</button>
 }
 <div class="modal" id="pay" tabindex="-1" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="container" id="payment">

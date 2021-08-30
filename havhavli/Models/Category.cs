@@ -10,6 +10,7 @@ namespace havhavli.Models
     {
         public int Id { get; set; }
         [Required(ErrorMessage ="בחר שם לקטגוריה")]
+        [Display(Name ="שם הקטגוריה")]
         public string name { get; set; }
         public List<Product> Products { get; set; }
 

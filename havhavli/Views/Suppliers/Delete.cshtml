@@ -1,13 +1,14 @@
 ﻿@model havhavli.Models.Supplier
 
 @{
-    ViewData["Title"] = "מחיקת ספק";
+    ViewData["Title"] = "הסר ספק";
 }
 
-<h1> מחיקת ספק</h1>
+<h1>הסרת ספק</h1>
 
-<h3>האם למחוק ספק זה??</h3>
+<h3>האם ברצונך להסיר ספק זה?</h3>
 <div>
+    <h4>ספק</h4>
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
@@ -32,7 +33,7 @@
     
     <form asp-action="Delete">
         <input type="hidden" asp-for="Id" />
-        <input type="submit" value="מחק" class="btn btn-danger" /> |
-        <a asp-action="Index">חזור אל רשימת ספקים</a>
+        <input type="submit" value="הסרה" class="btn btn-danger" /> |
+        <a asp-action="Index">חזור לרשימת ספקים</a>
     </form>
 </div>

@@ -9,8 +9,8 @@ using havhavli.Data;
 namespace havhavli.Migrations
 {
     [DbContext(typeof(havhavliContext))]
-    [Migration("20210822111926_addedsuppliers")]
-    partial class addedsuppliers
+    [Migration("20210829120214_FixSuppliers")]
+    partial class FixSuppliers
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -33,6 +33,21 @@ namespace havhavli.Migrations
                     b.HasIndex("SuppliersId");
 
                     b.ToTable("BranchSupplier");
+                });
+
+            modelBuilder.Entity("ProductShoppingCart", b =>
+                {
+                    b.Property<int>("CartsId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ProductsId")
+                        .HasColumnType("int");
+
+                    b.HasKey("CartsId", "ProductsId");
+
+                    b.HasIndex("ProductsId");
+
+                    b.ToTable("ProductShoppingCart");
                 });
 
             modelBuilder.Entity("havhavli.Models.Branch", b =>
@@ -87,14 +102,40 @@ namespace havhavli.Migrations
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
 
+                    b.Property<int>("SupplierID")
+                        .HasColumnType("int");
+
                     b.Property<int>("categoryId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
+                    b.HasIndex("SupplierID");
+
                     b.HasIndex("categoryId");
 
                     b.ToTable("Product");
+                });
+
+            modelBuilder.Entity("havhavli.Models.ShoppingCart", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<float>("TotalPrice")
+                        .HasColumnType("real");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId")
+                        .IsUnique();
+
+                    b.ToTable("ShoppingCart");
                 });
 
             modelBuilder.Entity("havhavli.Models.Supplier", b =>
@@ -181,8 +222,29 @@ namespace havhavli.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("ProductShoppingCart", b =>
+                {
+                    b.HasOne("havhavli.Models.ShoppingCart", null)
+                        .WithMany()
+                        .HasForeignKey("CartsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("havhavli.Models.Product", null)
+                        .WithMany()
+                        .HasForeignKey("ProductsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("havhavli.Models.Product", b =>
                 {
+                    b.HasOne("havhavli.Models.Supplier", "supplier")
+                        .WithMany("Products")
+                        .HasForeignKey("SupplierID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("havhavli.Models.category", "category")
                         .WithMany("Products")
                         .HasForeignKey("categoryId")
@@ -190,6 +252,29 @@ namespace havhavli.Migrations
                         .IsRequired();
 
                     b.Navigation("category");
+
+                    b.Navigation("supplier");
+                });
+
+            modelBuilder.Entity("havhavli.Models.ShoppingCart", b =>
+                {
+                    b.HasOne("havhavli.Models.User", "User")
+                        .WithOne("Cart")
+                        .HasForeignKey("havhavli.Models.ShoppingCart", "UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("havhavli.Models.Supplier", b =>
+                {
+                    b.Navigation("Products");
+                });
+
+            modelBuilder.Entity("havhavli.Models.User", b =>
+                {
+                    b.Navigation("Cart");
                 });
 
             modelBuilder.Entity("havhavli.Models.category", b =>

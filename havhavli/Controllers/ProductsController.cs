@@ -24,14 +24,26 @@ namespace havhavli.Controllers
         // GET: Products
         public async Task<IActionResult> Index()
         {
-            var havhavliContext = _context.Product.Include(p => p.category);
+            var havhavliContext = _context.Product.Include(p => p.category).Include(p => p.supplier);
             return View(await havhavliContext.ToListAsync());
         }
 
         public async Task<IActionResult> Search(string query)
         {
-            var havhavliContext = _context.Product.Include(a => a.category).Where(a => a.Name.Contains(query) || a.Description.Contains(query)||query==null || a.category.name.Equals(query));
+            var havhavliContext = _context.Product.Include(a => a.category).Include(p => p.supplier).Where(a => a.Name.Contains(query) || a.Description.Contains(query)||query==null || a.category.name.Contains(query));
             return View("index",await havhavliContext.ToListAsync());
+        }
+
+        public async Task<IActionResult> Category(int id)
+        {
+            var havhavliContext = _context.Product.Include(a => a.category).Where(a => a.categoryId == id);
+            return View("index", await havhavliContext.ToListAsync());
+        }
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> SupplierProducts(int id)
+        {
+            var havhavliContext = _context.Product.Include(a => a.supplier).Where(a => a.SupplierID == id);
+            return View( await havhavliContext.ToListAsync());
         }
 
         // GET: Products/Create
@@ -39,6 +51,7 @@ namespace havhavli.Controllers
         public IActionResult Create()
         {
             ViewData["categoryId"] = new SelectList(_context.Set<category>(), "Id", "name");
+            ViewData["SupplierId"] = new SelectList(_context.Supplier, "Id", "Name");
             return View();
         }
 
@@ -47,7 +60,7 @@ namespace havhavli.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Description,Quantity,Price,Image,categoryId")] Product product)
+        public async Task<IActionResult> Create([Bind("Id,Name,Description,Quantity,Price,Image,categoryId,SupplierID")] Product product)
         {
             if (ModelState.IsValid)
             {
@@ -56,6 +69,7 @@ namespace havhavli.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["categoryId"] = new SelectList(_context.Set<category>(), "Id", "Id", product.categoryId);
+            ViewData["SupplierId"] = new SelectList(_context.Supplier, "Id", "Name", product.SupplierID);
             return View(product);
         }
 
@@ -92,7 +106,8 @@ namespace havhavli.Controllers
             {
                 return NotFound();
             }
-            ViewData["categoryId"] = new SelectList(_context.Set<category>(), "Id", "Id", product.categoryId);
+            ViewData["categoryId"] = new SelectList(_context.Set<category>(), "Id", "name", product.categoryId);
+            ViewData["SupplierId"] = new SelectList(_context.Supplier, "Id", "Name", product.SupplierID);
             return View(product);
         }
 
@@ -101,7 +116,7 @@ namespace havhavli.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Description,Quantity,Price,Image,categoryId")] Product product)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Description,Quantity,Price,Image,categoryId,SupplierID")] Product product)
         {
             if (id != product.Id)
             {
@@ -129,6 +144,7 @@ namespace havhavli.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["categoryId"] = new SelectList(_context.Set<category>(), "Id", "Id", product.categoryId);
+            ViewData["SupplierId"] = new SelectList(_context.Supplier, "Id", "Name", product.SupplierID);
             return View(product);
         }
 
@@ -143,6 +159,7 @@ namespace havhavli.Controllers
 
             var product = await _context.Product
                 .Include(p => p.category)
+                .Include(p => p.supplier)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (product == null)
             {

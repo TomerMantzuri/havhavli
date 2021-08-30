@@ -2,7 +2,7 @@
 
 namespace havhavli.Migrations
 {
-    public partial class FixQuantity1 : Migration
+    public partial class Fix : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
