@@ -1,62 +1,59 @@
 ﻿@model IEnumerable<havhavli.Models.ShoppingCart>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "עגלות";
 }
 
-<h1>Index</h1>
+<h1>רשימת עגלות פתוחות</h1>
 <table class="table-striped styleTable">
-    <thead>
+    <thead cellspacing="40">
         <tr>
             <th>
-                <div>Cart Id</div>
-            </th>
-            <th>
-                <div>User Name</div>
-            </th>
-            <th>
-                <div>Total Price</div>
-            </th>
-            <th>
-                <div>Products</div>
-            </th>
-            <th>
-                <div>Number of Products</div>
+                <div></div>
             </th>
             <th></th>
+            <th>
+                <div>לקוח</div>
+            </th>
+            <th>
+                <div>סך לתשלום</div>
+            </th>
+            <th></th>
+            <th>
+                <div class="text-center">מוצרים</div>
+            </th>
+            <th>
+                סה"כ
+            </th>
 
         </tr>
     </thead>
     <tbody>
         @foreach (var item in Model)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Id)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.User.Username)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.TotalPrice)
-                </td>
-                <td>
-                    @foreach (var i in item.Products)
-                    {
-                        @Html.DisplayFor(modelItem => i.Name) <br />}
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Products.Count)
-                </td>
-
-                <td>
-                    <div class="btn-group">
-                        <a class="btn btn-secondary" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
-                        <a class="btn btn-secondary" asp-action="Details" asp-route-id="@item.Id">Details</a>
-                        <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id"><i class="fa fa-trash"></i></a>
-                    </div>
-                </td>
-            </tr>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td></td>
+            <td>
+                @Html.DisplayFor(modelItem => item.User.Username)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TotalPrice)
+            </td>
+            <td></td>
+            <td>
+                @foreach (var i in item.Products)
+                {
+                    @Html.DisplayFor(modelItem => i.Name)
+                    <br />
+                }
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Products.Count)
+            </td>
+        </tr>
         }
     </tbody>
 

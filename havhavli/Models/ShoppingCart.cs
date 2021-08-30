@@ -16,9 +16,5 @@ namespace havhavli.Models
         [DataType(DataType.Currency)]
         public float TotalPrice { get; set; } = 0;
         public List<Product> Products { get; set; }
-        internal static object Index()
-        {
-            throw new NotImplementedException();
-        }
     }
 }

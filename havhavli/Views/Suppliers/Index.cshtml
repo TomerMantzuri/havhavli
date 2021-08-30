@@ -9,6 +9,11 @@
 <p>
     <a asp-action="Create">הוסף ספק</a>
 </p>
+<form asp-action="Search">
+    <input name="query" id="query" autocomplete="off" placeholder="חיפוש..." />
+    <input type="submit" value="חיפוש" />
+</form>
+
 <table class="table">
     <thead>
         <tr>
@@ -25,23 +30,41 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ContactName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Phone)
-            </td>
-            <td>
-                <a asp-controller="Products" asp-action="SupplierProducts" asp-route-id="@item.Id">מוצרים</a> |
-                <a asp-action="Edit" asp-route-id="@item.Id">ערוך פרטי ספק</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">הסר ספק</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ContactName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Phone)
+                </td>
+                <td>
+                    <a asp-controller="Products" asp-action="SupplierProducts" asp-route-id="@item.Id">מוצרים</a> |
+                    <a asp-action="Edit" asp-route-id="@item.Id">ערוך פרטי ספק</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">הסר ספק</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
+@section Scripts{
+    <script src="~/js/SupplierSearch.js"></script>
+    <script type="text/html" id="hidden-template">
+        <tr>
+            <td>
+                {Name}
+            </td>
+            <td>
+                {ContactName}
+            </td>
+            <td>
+                <a href="/Suppliers/Edit/{id}">ערוך פרטי ספק</a> |
+                <a href="/Suppliers/Delete/{id}">הסר ספק</a>
+            </td>
+        </tr>
+    </script>
+}

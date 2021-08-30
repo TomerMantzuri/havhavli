@@ -47,96 +47,6 @@ namespace havhavli.Controllers
             return View("MyCart", cart);
         }
 
-        // GET: ShoppingCarts/Edit/5
-        [Authorize]
-        public async Task<IActionResult> Edit(int? id)
-        {
-            if (id == null)
-            {
-                return RedirectToAction("PageNotFound", "Home");
-            }
-
-            var shoppingCart = await _context.ShoppingCart.FindAsync(id);
-            if (shoppingCart == null)
-            {
-                return RedirectToAction("PageNotFound", "Home");
-            }
-            ViewData["UserId"] = new SelectList(_context.User, "Id", "Password", shoppingCart.UserId);
-            return View(shoppingCart);
-        }
-
-        // POST: ShoppingCarts/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,UserId,TotalPrice")] ShoppingCart shoppingCart)
-        {
-            if (id != shoppingCart.Id)
-            {
-                return RedirectToAction("PageNotFound", "Home");
-            }
-
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(shoppingCart);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!ShoppingCartExists(shoppingCart.Id))
-                    {
-                        return RedirectToAction("PageNotFound", "Home");
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(MyCart));
-            }
-            ViewData["UserId"] = new SelectList(_context.User, "Id", "Password", shoppingCart.UserId);
-            return View(shoppingCart);
-        }
-
-        // GET: ShoppingCarts/Delete/5
-        [Authorize]
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (id == null)
-            {
-                return RedirectToAction("PageNotFound", "Home");
-            }
-
-            var shoppingCart = await _context.ShoppingCart
-                .Include(s => s.User)
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (shoppingCart == null)
-            {
-                return RedirectToAction("PageNotFound", "Home");
-            }
-
-            return View(shoppingCart);
-        }
-
-        // POST: ShoppingCarts/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            var cart = await _context.ShoppingCart
-               .Include(c => c.User)
-               .Include(p => p.Products)
-               .FirstOrDefaultAsync(m => m.Id == id);
-            cart.Products.Clear();
-            cart.TotalPrice = 0;
-            _context.Update(cart);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
-        }
 
         private bool ShoppingCartExists(int id)
         {
@@ -167,7 +77,6 @@ namespace havhavli.Controllers
             ShoppingCart cart = _context.ShoppingCart.Include(db => db.Products)
              .FirstOrDefault(x => x.UserId == user.Id);
 
-
             if (user.Cart.Products == null)
                 user.Cart.Products = new List<Product>();
             if (product.Carts == null)
@@ -175,18 +84,18 @@ namespace havhavli.Controllers
 
             if (!(cart.Products.Contains(product) && product.Carts.Contains(cart)))
             {
-                user.Cart.Products.AddRange(Enumerable.Repeat(product, quantity));
-             //   user.Cart.Products.Add(product);
+                product.QuantityInCart = quantity;
+                user.Cart.Products.Add(product);
                 product.Carts.Add(cart);
-                user.Cart.TotalPrice += product.Price * quantity;
+                user.Cart.TotalPrice +=product.Price* product.QuantityInCart;
                 _context.Update(cart);
                 _context.Update(product);
                 await _context.SaveChangesAsync();
             }
             return RedirectToAction("Index", "Products");
         }
-
-        // POST: Carts/removeProduct/5
+ 
+            // POST: Carts/removeProduct/5
         [HttpPost, ActionName("RemoveProduct")]
         [ValidateAntiForgeryToken]
         [Authorize]
@@ -194,14 +103,13 @@ namespace havhavli.Controllers
         {
             Product product = _context.Product.FirstOrDefault(x => x.Id == id);
             String userName = HttpContext.User.Identity.Name;
-
             User user = _context.User.FirstOrDefault(x => x.Username.Equals(userName));
             ShoppingCart cart = _context.ShoppingCart.Include(db => db.Products)
                 .FirstOrDefault(x => x.UserId == user.Id);
             if (product != null)
             {
-                cart.Products.Remove(product);
-                cart.TotalPrice -= product.Price;
+                cart.TotalPrice -= product.Price* product.QuantityInCart;
+                cart.Products.Remove(product);//Remove by amount
             }
 
             _context.Attach<ShoppingCart>(cart);
@@ -210,6 +118,38 @@ namespace havhavli.Controllers
             return RedirectToAction(nameof(MyCart));
         }
 
+
+        [HttpPost, ActionName("EditQuantity")]
+        [ValidateAntiForgeryToken]
+        [Authorize]
+        public async Task<IActionResult> EditQuantity(int id, int quantity)
+        {
+            Product product = _context.Product.Include(db => db.Carts).FirstOrDefault(x => x.Id == id);
+            String userName = HttpContext.User.Identity.Name;
+            User user = _context.User.FirstOrDefault(x => x.Username.Equals(userName));
+            ShoppingCart cart = _context.ShoppingCart.Include(db => db.Products)
+             .FirstOrDefault(x => x.UserId == user.Id);
+
+            if (user.Cart.Products == null)
+                user.Cart.Products = new List<Product>();
+            if (product.Carts == null)
+                product.Carts = new List<ShoppingCart>();
+
+            if (product.QuantityInCart == quantity)
+            {
+                return RedirectToAction(nameof(MyCart));
+            }
+            else
+            {
+                cart.TotalPrice -= (product.Price * product.QuantityInCart);
+                cart.TotalPrice += (product.Price * quantity);
+                product.QuantityInCart = quantity;
+                _context.Update(cart);
+                _context.Update(product);
+                await _context.SaveChangesAsync();
+            }
+            return RedirectToAction(nameof(MyCart));
+        }
         [Authorize]
         public async Task<IActionResult> AfterPayment()
         {

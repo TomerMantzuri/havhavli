@@ -33,15 +33,6 @@
                                 </svg>
                             </a>
                         </li>
-                        @if (Context.User.IsInRole("Admin"))
-                        {
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Suppliers" asp-action="Index">ניהול ספקים</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Products" asp-action="Statistics">סטטיסטיקה</a>
-                            </li>
-                        }
                         @if (Context.User != null && Context.User.Claims != null && Context.User.Claims.Count() > 0)
                         {
                             <li class="nav-item">
@@ -52,6 +43,20 @@
                         {
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Users" asp-action="Login">התחבר</a>
+                            </li>
+                        }
+                        @if (Context.User.IsInRole("Admin"))
+                        {
+                            <li class="nav-item dropdown">
+                                <a style="color:black" class="btn dropdown-toggle; text-black" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
+                                    מנהלים🤵🏼‍
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li class="text-center"><a class="dropdown-item; text-dark" href="\Categories\Index">קטגוריות</a></li>
+                                    <li class="text-center"><a class="dropdown-item; text-dark" href="\Suppliers\Index">ספקים</a></li>
+                                    <li class="text-center"><a class="dropdown-item; text-dark" href="\Products\Statistics">סטטיסטיקה</a></li>
+                                    <li class="text-center"><a class="dropdown-item; text-dark" href="\ShoppingCarts\Index">הצג עגלות פתוחות</a></li>
+                                </ul>
                             </li>
                         }
                     </ul>

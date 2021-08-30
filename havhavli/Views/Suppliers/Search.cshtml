@@ -1,0 +1,21 @@
+﻿@model IEnumerable<havhavli.Models.Supplier>
+
+
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ContactName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Phone)
+            </td>
+            <td>
+                <a asp-controller="Products" asp-action="SupplierProducts" asp-route-id="@item.Id">מוצרים</a> |
+                <a asp-action="Edit" asp-route-id="@item.Id">ערוך פרטי ספק</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">הסר ספק</a>
+            </td>
+        </tr>
+}

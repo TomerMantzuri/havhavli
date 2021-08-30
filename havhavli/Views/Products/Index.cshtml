@@ -16,40 +16,52 @@
     <input name="query" id="query" autocomplete="off" placeholder="חיפוש..." />
     <input type="submit" value="חיפוש" />
 </form>
-<div class="container">
-    <div class="row">
-        @foreach (var item in Model)
-        {
-            <div class="card col-3" style="width: 18rem;">
-                <img src="@item.Image" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">@item.Name</h5>
-                    <p class="card-text"> @item.Description</p>
-                    <p class="card-text"> @item.Price ש"ח</p>
-                    @if (Context.User != null && Context.User.Claims != null && Context.User.Claims.Count() > 0)
-                    {
-                        <form asp-controller="ShoppingCarts" asp-action="AddToCart" asp-route-id="@item.Id"  method="post">
-                            <button onclick="myFunction()" type="submit" class="btn btn-outline-success card-background">
-                                הוסף לעגלת הקניות
-                            </button>
-                        </form>
-                    }
-                    else
-                    {
-                        <a class="btn btn-outline-success card-background" asp-area="" asp-controller="Users" asp-action="Login">הוסף לעגלת הקניות</a>
-                    }
-                </div>
-                @if (Context.User.IsInRole("Admin"))
+
+<table class="table">
+    <tbody>
+        <div class="container">
+            <div class="row">
+                @foreach (var item in Model)
                 {
-                    <div>
-                        <a asp-action="Edit" asp-route-id="@item.Id">עריכת מוצר</a> |
-                        <a asp-action="Delete" asp-route-id="@item.Id">מחיקת מוצר</a>
+                    <div class="card col-3" style="width: 18rem;">
+                        <img src="@item.Image" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">@item.Name</h5>
+                            <p class="card-text"> @item.Description</p>
+                            <p class="card-text"> @item.Price ש"ח</p>
+                            @if (Context.User != null && Context.User.Claims != null && Context.User.Claims.Count() > 0)
+                            {
+                                <form class="formStyle" asp-controller="ShoppingCarts" asp-action="AddToCart" asp-route-id="@item.Id" method="post">
+                                    <label class="text-dark text-center" for="quantity">כמות : </label><br />
+                                    <select class="choiceStyle" name="quantity" id="quantity" required>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                    </select>
+ 
+                                    <button type="submit" value="AddToCart" class="btn btn-dark">הוסף לסל הקניות</button>
+                                </form>
+                            }
+                            else
+                            {
+                                <a class="btn btn-outline-success card-background" asp-area="" asp-controller="Users" asp-action="Login">הוסף לעגלת הקניות</a>
+                            }
+                        </div>
+                        @if (Context.User.IsInRole("Admin"))
+                        {
+                            <div>
+                                <a asp-action="Edit" asp-route-id="@item.Id">עריכת מוצר</a> |
+                                <a asp-action="Delete" asp-route-id="@item.Id">מחיקת מוצר</a>
+                            </div>
+                        }
                     </div>
                 }
             </div>
-        }
-    </div>
-</div>
+        </div>
+    </tbody>
+</table>
 
 <script>
     function myFunction() {

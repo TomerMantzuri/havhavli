@@ -32,6 +32,6 @@ namespace havhavli.Models
         [Display(Name = "שם הספק")]
         public int SupplierID { get; set; }
         public Supplier supplier { get; set; }
-
+        public int QuantityInCart { get; set; } = 0;
     }
 }

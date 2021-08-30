@@ -37,13 +37,18 @@
                 @Html.DisplayFor(modelItem => item.Price)
             </td>
             <td>
-                <p class="card-text">@Model.Products.Where(a => a == item).Count()</p>
+                @Html.DisplayFor(modelItem => item.QuantityInCart)
             </td>
             <td>
-                <form asp-controller="ShoppingCarts" asp-action="AddToCart" asp-route-id="@item.Id"  method="post">
-                    <label for="quantity">כמות:</label>
-                    <input type="number" id="quantity" name="quantity" min="1" max="5" value="1" >
-                    <input type="submit" value="עדכן כמות">
+                <form class="formStyle" asp-controller="ShoppingCarts" asp-action="EditQuantity" asp-route-id="@item.Id" method="post">
+                    <select class="choiceStyle" name="quantity" id="quantity" required>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                    </select>
+                    <button type="submit" value="AddToCart" class="btn btn-dark">עדכן</button>
                 </form>
             </td>
             <td>
