@@ -28,8 +28,7 @@ namespace havhavli.Controllers
 
         public async Task<IActionResult> Search(string query)
         {
-            var havhavliContext = _context.Product.Include(a => a.category).Where(a => a.Name.Contains(query) || query == null);
-            return Json("index", await havhavliContext.ToListAsync());
+            return Json(await _context.category.Where(c => c.name.Contains(query)||query == null).ToListAsync());
         }
 
 

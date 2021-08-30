@@ -27,6 +27,12 @@ namespace havhavli.Controllers
             return View(await _context.Supplier.ToListAsync());
         }
         [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> Search(string query)
+        {
+            return Json(await _context.Supplier.Where(c => c.Name.Contains(query) || c.ContactName.Contains(query) || query == null).ToListAsync());
+        }
+
+        [Authorize(Roles = "Admin")]
         // GET: Suppliers/Create
         public IActionResult Create()
         {

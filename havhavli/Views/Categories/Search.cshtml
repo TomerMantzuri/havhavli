@@ -1,20 +1,5 @@
 ﻿@model IEnumerable<havhavli.Models.category>
 
-@{
-    ViewData["Title"] = "קטגוריות";
-}
-
-<h1>קטגוריות</h1>
-
-<p>
-    <a asp-action="Create">צור קטגוריה חדשה</a>
-</p>
-
-
-<form asp-action="Search">
-    <input name="query" id="query" autocomplete="off" />
-    <input type="submit" />
-</form>
 <table class="table">
     <thead>
         <tr>
@@ -39,18 +24,4 @@
         }
     </tbody>
 </table>
-@section Scripts{
-    <script src="~/js/newsearch.js"></script>
-    <script type="text/html" id="hidden-template">
-        <tr>
-            <td>
-                {name}
-            </td>
-            <td>
-                <a href="/categories/Edit/{id}">עריכת קטגוריה</a> |
-                <a href="/categories/Delete/{id}">מחיקת קטגוריה</a>
-            </td>
-        </tr>
-    </script>
-}
-        
+
