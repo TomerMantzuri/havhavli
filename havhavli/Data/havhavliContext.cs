@@ -9,7 +9,7 @@ namespace havhavli.Data
 {
     public class havhavliContext : DbContext
     {
-        public havhavliContext (DbContextOptions<havhavliContext> options)
+        public havhavliContext(DbContextOptions<havhavliContext> options)
             : base(options)
         {
         }
