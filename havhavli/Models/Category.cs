@@ -11,7 +11,9 @@ namespace havhavli.Models
         public int Id { get; set; }
         [Required(ErrorMessage ="בחר שם לקטגוריה")]
         [Display(Name ="שם הקטגוריה")]
+        [RegularExpression(@"^[א-ת ]+$", ErrorMessage = "שם הקטגוריה חייב להיות אותיות בעברית בלבד")]
         public string name { get; set; }
+        [Display(Name = "מוצרים")]
         public List<Product> Products { get; set; }
 
     }

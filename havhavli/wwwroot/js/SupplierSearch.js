@@ -10,7 +10,6 @@
         }).done(function (data) {
             $('tbody').html('');
             var template = $('#hidden-template').html();
-            console.log(data);
             $.each(data, function (i, val) {
                 var temp = template;
                 $.each(val, function (key, value) {

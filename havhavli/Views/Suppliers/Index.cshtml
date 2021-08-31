@@ -11,7 +11,7 @@
 </p>
 <form asp-action="Search">
     <input name="query" id="query" autocomplete="off" placeholder="חיפוש..." />
-    <input type="submit" value="חיפוש" />
+    <input type="submit" value="🔍" />
 </form>
 
 <table class="table">
@@ -56,12 +56,16 @@
     <script type="text/html" id="hidden-template">
         <tr>
             <td>
-                {Name}
+                {name}
             </td>
             <td>
-                {ContactName}
+                {contactName}
             </td>
             <td>
+                {phone}
+            </td>
+            <td>
+                <a href="/Products/SupplierProducts/{id}">מוצרים</a> |
                 <a href="/Suppliers/Edit/{id}">ערוך פרטי ספק</a> |
                 <a href="/Suppliers/Delete/{id}">הסר ספק</a>
             </td>

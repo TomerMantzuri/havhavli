@@ -22,14 +22,12 @@ namespace havhavli.Models
         [Display(Name ="סיסמא")]
         [DataType(DataType.Password)]
         public string Password { get; set; }
-      //  [Required(ErrorMessage ="אנא הכנס כתובת מייל")]
         [Display(Name = "אימייל")]
-        [DataType(DataType.EmailAddress)]
+        [DataType(DataType.EmailAddress,ErrorMessage ="אנא הכנס כתובת מייל תיקנית")]
         public string EmailAddress { get; set; }
-       // [Required(ErrorMessage ="אנא הכנס תאריך לידה")]
         [Display(Name = "תאריך לידה")]
-        [DataType(DataType.Date)]
-        public string BirthDay { get; set; }
+        [DataType(DataType.Date,ErrorMessage ="אנא הכנס תאריך לידה תקין")]
+        public string BirthDay { get; set; } = "01 / 01 / 2001";
         public UserType Type { get; set; } = UserType.Client;
         public ShoppingCart Cart { get; set; } = new ShoppingCart();
     }

@@ -4,9 +4,11 @@
     ViewData["Title"] = "סל הקניות שלי";
 }
 
+<h1 class="text-center">עגלת הקניות שלי</h1>
+
 <form asp-action="Search">
     <input name="query" placeholder="חפש מוצר" />
-    <input type="submit" value="חפש" class="btn btn-primary" />
+    <input type="submit" value="🔍" class="btn btn-primary" />
 </form>
 
 <table class="table-striped styleTable">
@@ -77,61 +79,67 @@
     <button class="btn btn-success" data-toggle="modal" data-target="#pay">שלם</button>
 }
 <div class="modal" id="pay" tabindex="-1" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-    <div class="container" id="payment">
+    <div class="container text-center" id="payment">
         <div class="creditCardInfo">
             <form>
+                <br />
+                <br />
+                <br />
+                <br />
                 <div class="cardholderName">
-                    <label>Card Number</label>
+                    <label class="text-white">מספר כרטיס</label>
                     <div class="cardholderName">
                         <input id="CardNumber" type="number" required min="1000000000000000" max="9999999999999999" />
                     </div>
                     <div name="validation"></div>
                     <div class="cardholderName">
-                        <label>Cardholder Name</label>
-                        <input id="CardHolder" type="text" required min="1" max="16" />
+                        <label class="text-white">שם בעל הכרטיס</label>
+                        <div>
+                            <input id="CardHolder" type="text" required min="1" max="16" />
+                        </div>
                     </div>
                 </div>
 
                 <div class="details">
                     <div class="exp">
-                        <label>Expiry Date</label>
+                        <label class="text-white">תאריך תפוגה</label>
                         <div id="sami">
                             <select id="exp">
                                 <option>
-                                    Jan
+                                    ינואר
                                 </option>
                                 <option>
-                                    Feb
+                                    פברואר
                                 </option>
                                 <option>
-                                    Mar
+                                    מרץ
                                 </option>
                                 <option>
-                                    Apr
+                                    אפריל
                                 </option>
                                 <option>
-                                    May
+                                    מאי
                                 </option>
                                 <option>
-                                    Jun
+                                    יוני
                                 </option>
                                 <option>
-                                    Jul
+                                    יולי
                                 </option>
                                 <option>
-                                    Aug
+                                    אוגוסט
                                 </option>
                                 <option>
-                                    Sep
+                                    ספטמבר
                                 </option>
                                 <option>
-                                    Oct
+                                    אוקטובר
                                 </option>
                                 <option>
-                                    Nov
+                                    נובמבר
                                 </option>
                                 <option>
-                                    Dec
+                                    דצמבר
                                 </option>
                             </select>
                             <select>
@@ -165,14 +173,14 @@
                 </div>
 
                 <div class="cvv">
-                    <label>CCV</label>
+                    <label class="text-white">CCV</label>
                     <div id="sami">
                         <input id="ccv" type="number" required min="100" max="999" />
                     </div>
                 </div>
                 <hr />
                 <div class="submitBtn">
-                    <input class="btn btn-success" value="Pay" type="submit" asp-controller="ShoppingCarts" asp-action="AfterPayment" />
+                    <input class="btn btn-success" value="שלם" type="submit" asp-controller="ShoppingCarts" asp-action="AfterPayment" />
                 </div>
             </form>
         </div>
