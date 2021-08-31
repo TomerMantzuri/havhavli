@@ -1,0 +1,24 @@
+﻿/*new font for the website - Font Assistant*/
+@import url('https://fonts.googleapis.com/css2?family=Assistant:wght@200;300;400;500;600;700;800&display=swap');
+
+body {
+    margin-bottom: 60px;
+    float: right;
+    text-align: right;
+    width: 100%;
+    background-image: url('../pics/background2.jpeg');
+    opacity: 0.8;
+    background-repeat: no-repeat;
+    background-size: cover;
+    font-family: 'Assistant';
+    /* color: #000000;*/
+    font-weight: bold;
+    padding-right: 5px;
+}
+.navbar-nav {
+    display: flex;
+    justify-content: space-evenly;
+}
+.container-main {
+    display: inline-block;
+}
