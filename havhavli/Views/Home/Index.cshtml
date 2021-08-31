@@ -20,50 +20,49 @@
     </div>
 *@
 <div>
-    <h1 class="display-4">ברוכים הבאים לחנות הב-הב לי</h1>
-    <p>חנות המוצרים לבעלי חיים המובילה בישראל</p>
+    <h1 class="display-4 text-center">ברוכים הבאים לחנות הב-הב לי</h1>
+    <p class="text-center">חנות המוצרים לבעלי חיים המובילה בישראל</p>
 </div>
 <body>
-        <div class="container-categories">
-            <div class="row">
-                <div class="col-4">
-                    <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
-                        <div class="carousel-inner">
-                            <div class="carousel-item active">
-                                <img src="~/pics/dog.jpeg" style="height:220px; width:300px;"/>
-                                <div class="carousel-caption d-none d-md-block" onclick="window.location.href = 'https://localhost:44311/Products/Category/1';">
-                                    <button class="sliderUpperMiddle btn" id="sliderBtn" type="button">
-                                        <h3 class="text-white">מוצרים לכלבים</h3>
-                                    </button>
-                                </div>
+    <div class="container-categories">
+        <div class="row">
+            <div class="col-4">
+                <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <img src="~/pics/כלב.jpeg" id="dog" style="height:220px; width:400px;" />
+                            <div class="carousel-caption d-none d-md-block" onclick="window.location.href = 'https://localhost:44311/Products/Category/1';">
+                                <button class="sliderUpperMiddle btn" id="sliderBtn" type="button">
+                                    <h3 class="text-white">מוצרים לכלבים</h3>
+                                </button>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-4">
-                    <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
-                        <div class="carousel-inner">
-                            <div class="carousel-item active">
-                                <img src="~/pics/cat.jpeg" style="height:220px; width:300px;"/>
-                                <div class="carousel-caption d-none d-md-block" onclick="window.location.href = 'https://localhost:44311/Products/Category/2';">
-                                    <button class="sliderUpperMiddle btn" id="sliderBtn" type="button">
-                                        <h3 class="text-white">מוצרים לחתולים</h3>
-                                    </button>
-                                </div>
+            </div>
+            <div class="col-4">
+                <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <img src="~/pics/חתול.jpg" style="height:220px; width:400px;" />
+                            <div class="carousel-caption d-none d-md-block" onclick="window.location.href = 'https://localhost:44311/Products/Category/2';">
+                                <button class="sliderUpperMiddle btn" id="sliderBtn" type="button">
+                                    <h3 class="text-white">מוצרים לחתולים</h3>
+                                </button>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-4">
-                    <div id="myCarousel" class="carousel slide w-auto" data-bs-ride="carousel">
-                        <div class="carousel-inner">
-                            <div class="carousel-item active">
-                                <img src="~/pics/fish.jpg" style="height:220px; width:300px;"/>
-                                <div class="carousel-caption d-none d-md-block" onclick="window.location.href = 'https://localhost:44311/Products/Category/3';">
-                                    <button class="sliderUpperMiddle btn" id="sliderBtn" type="button">
-                                        <h3 class="text-white" >מוצרים לדגים</h3>
-                                    </button>
-                                </div>
+            </div>
+            <div class="col-4">
+                <div id="myCarousel" class="carousel slide w-auto" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <img src="~/pics/fish.jpg" style="height:220px; width:400px;" />
+                            <div class="carousel-caption d-none d-md-block" onclick="window.location.href = 'https://localhost:44311/Products/Category/3';">
+                                <button class="sliderUpperMiddle btn" id="sliderBtn" type="button">
+                                    <h3 class="text-white">מוצרים לדגים</h3>
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -77,7 +76,7 @@
         <div class="video-container">
             <h1>חדש בחנות! בונזו בשר המכיל אומגה 3 במיוחד לכלב שלך🐶</h1>
             <video class="main-vid1" width="400" controls>
-                <source src="~/video/main-video.mp4" type="video/mp4">
+                <source src="~/video/Bonzo.mp4" type="video/mp4">
                 Your browser does not support the video tag.
             </video>
         </div>
@@ -96,18 +95,34 @@
 
         <hr class="featurette-divider">
 
-            <div class="row featurette">
-                <div class="col-md-12">
-                    <h2 class="featurette-heading" style="text-align:center">מזג אוויר <span class="">🌤️</span></h2>
-                    <p class="lead" style="text-align:center">בדוק את המזג אוויר לפני שאתה מוציא את הכלב לטיול, אולי חם מדי והכלב עלול לקבל כווית בכפות הרגלים!</p>
-                </div>
+        <div class="row featurette">
+            <div class="col-md-12">
+                <h2 class="featurette-heading" style="text-align:center">מזג אוויר <span class="">🌤️</span></h2>
+                <p class="lead" style="text-align:center">בדוק את המזג אוויר לפני שאתה מוציא את הכלב לטיול, אולי חם מדי והכלב עלול לקבל כווית בכפות הרגלים!</p>
             </div>
         </div>
-        <a class="weatherwidget-io" href="https://forecast7.com/he/31d0534d85/israel/" data-label_1="מזג אוויר" data-label_2="ישראל" data-theme="original">מזג אוויר ישראל</a>
-        <script>
-            !function (d, s, id) { var js, fjs = d.getElementsByTagName(s)[0]; if (!d.getElementById(id)) { js = d.createElement(s); js.id = id; js.src = 'https://weatherwidget.io/js/widget.min.js'; fjs.parentNode.insertBefore(js, fjs); } }(document, 'script', 'weatherwidget-io-js');
-        </script>
-        <br />
     </div>
-    <
+    <a class="weatherwidget-io" href="https://forecast7.com/he/31d0534d85/israel/" data-label_1="מזג אוויר" data-label_2="ישראל" data-theme="original">מזג אוויר ישראל</a>
+    <script>
+        !function (d, s, id) { var js, fjs = d.getElementsByTagName(s)[0]; if (!d.getElementById(id)) { js = d.createElement(s); js.id = id; js.src = 'https://weatherwidget.io/js/widget.min.js'; fjs.parentNode.insertBefore(js, fjs); } }(document, 'script', 'weatherwidget-io-js');
+    </script>
+
+
+    @*
+            <------------------- Canvas example -------------------->
+        <canvas id="myCanvas" width="200" height="200"
+                style="border:1px solid #d3d3d3;">
+            Your browser does not support the HTML5 canvas tag.
+        </canvas>
+
+        <script>
+            window.onload = function () {
+                var canvas = document.getElementById("myCanvas");
+                var ctx = canvas.getContext("2d");
+                var img = document.getElementById("dog");
+                ctx.drawImage(img, 10, 10);
+            };
+        </script>
+    *@
+
 </body>
