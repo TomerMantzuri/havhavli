@@ -1,12 +1,28 @@
 ﻿@{
     ViewData["Title"] = "הב-הב לי";
 }
-
-<div class="text-center">
+@*
+    <div class="homepage">
+        <div class="videoWrapper homeTopVideoWrapper">
+            <div class="textContainer">
+                <div class="contentInner">
+                    <div class="textInner">
+                        <h1 class="display-4" id="textVideoTop">ברוכים הבאים לחנות הב-הב לי</h1>
+                    </div>
+                </div>
+            </div>
+            <div class="video-container">
+                <video class="video" autoplay="autoplay" loop="loop" muted="muted" playsinline="playsinline">
+                    <source src="~/video/dog-vet.mp4" type="video/mp4">
+                </video>
+            </div>
+        </div>
+    </div>
+*@
+<div>
     <h1 class="display-4">ברוכים הבאים לחנות הב-הב לי</h1>
     <p>חנות המוצרים לבעלי חיים המובילה בישראל</p>
 </div>
-
 <body>
         <div class="container-categories">
             <div class="row">
@@ -54,30 +70,31 @@
                 </div>
             </div>
         </div>
+    </div>
 
-        <div class="container marketing">
-            <hr class="featurette-divider">
-            <div class="video-container">
-                <h1 style="text-align:center">חדש בחנות! בונזו בשר המכיל אומגה 3 במיוחד לכלב שלך🐶</h1>
-                <video class="main-vid1" width="400">
-                    <source src="~/video/main-video.mp4" type="video/mp4">
-                    Your browser does not support the video tag.
-                </video>
+    <div class="container marketing">
+        <hr class="featurette-divider">
+        <div class="video-container">
+            <h1>חדש בחנות! בונזו בשר המכיל אומגה 3 במיוחד לכלב שלך🐶</h1>
+            <video class="main-vid1" width="400" controls>
+                <source src="~/video/main-video.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+
+        <hr class="featurette-divider">
+        <div class="row featurette">
+            <div class="col-md-12">
+                <h2 class="featurette-heading">רק רגע!</h2>
+                <p class="lead"> השקיעו דקה מזמנכם ולמדו שיעור חשוב על הרגלי תזונה עבור הכלב שלכם</p>
             </div>
+            <video class="main-vid2" width="400" controls>
+                <source src="~/video/It's all about Dogs.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
 
-            <hr class="featurette-divider">
-            <div class="row featurette">
-                <div class="col-md-12">
-                    <h2 class="featurette-heading" style="text-align:center">רק רגע!</h2>
-                    <p class="lead" style="text-align:center"> השקיעו דקה מזמנכם ולמדו שיעור חשוב על הרגלי תזונה עבור הכלב שלכם</p>
-                </div>
-                <video class="main-vid2" width="400">
-                    <source src="~/video/It's all about Dogs.mp4" type="video/mp4">
-                    Your browser does not support the video tag.
-                </video>
-            </div>
-
-            <hr class="featurette-divider">
+        <hr class="featurette-divider">
 
             <div class="row featurette">
                 <div class="col-md-12">
@@ -85,13 +102,12 @@
                     <p class="lead" style="text-align:center">בדוק את המזג אוויר לפני שאתה מוציא את הכלב לטיול, אולי חם מדי והכלב עלול לקבל כווית בכפות הרגלים!</p>
                 </div>
             </div>
-            <a class="weatherwidget-io" href="https://forecast7.com/he/31d0534d85/israel/" data-label_1="מזג אוויר" data-label_2="ישראל" data-theme="original">מזג אוויר ישראל</a>
-            <script>
-                !function (d, s, id) { var js, fjs = d.getElementsByTagName(s)[0]; if (!d.getElementById(id)) { js = d.createElement(s); js.id = id; js.src = 'https://weatherwidget.io/js/widget.min.js'; fjs.parentNode.insertBefore(js, fjs); } }(document, 'script', 'weatherwidget-io-js');
-            </script>
-            <br />
-
-            <!-- /END THE FEATURETTES -->
-
-        </div><!-- /.container -->
-<</body>
+        </div>
+        <a class="weatherwidget-io" href="https://forecast7.com/he/31d0534d85/israel/" data-label_1="מזג אוויר" data-label_2="ישראל" data-theme="original">מזג אוויר ישראל</a>
+        <script>
+            !function (d, s, id) { var js, fjs = d.getElementsByTagName(s)[0]; if (!d.getElementById(id)) { js = d.createElement(s); js.id = id; js.src = 'https://weatherwidget.io/js/widget.min.js'; fjs.parentNode.insertBefore(js, fjs); } }(document, 'script', 'weatherwidget-io-js');
+        </script>
+        <br />
+    </div>
+    <
+</body>

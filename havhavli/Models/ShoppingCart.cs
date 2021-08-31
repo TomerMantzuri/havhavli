@@ -13,7 +13,7 @@ namespace havhavli.Models
         public User User { get; set; }
         [Required]
         [Display(Name ="סך הכל ")]
-        [DataType(DataType.Currency)]
+        [DataType(DataType.Currency,ErrorMessage ="אנא השתמש בספרות בלבד")]
         public float TotalPrice { get; set; } = 0;
         public List<Product> Products { get; set; }
     }
