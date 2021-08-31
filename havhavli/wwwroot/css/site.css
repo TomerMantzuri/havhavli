@@ -69,10 +69,10 @@ body {
     float: right;
     text-align: right;
     width: 100%;
-    background-image: url('../pics/background.jpg');
     background-repeat: no-repeat;
     background-size: cover;
-    /*background-position: center;*/
+    background-color: beige;
+    background-image: none;
     font-family: 'Assistant';
     color: #000000;
     font-weight: bold;
@@ -129,4 +129,27 @@ width: 800px;
 .container-categories {
     display: flex;
     justify-content: center;
+}
+
+.container-about-map {
+    display: flex;
+    justify-content: center;
+    padding-top: 3%;
+}
+
+.total-price {
+    display: flex;
+    font-size: xx-large;
+}
+
+.container-payment {
+    background: steelblue;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.container-products {
+    padding-top: 15px;
 }

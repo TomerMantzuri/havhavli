@@ -5,11 +5,11 @@
     Layout = "_LoginLayout";
 }
 
-<h1>התחבר</h1>
+<h1 class="text-center">התחבר</h1>
 
 <hr />
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-2" style="margin-right:15px">
         <form asp-action="Login">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
@@ -33,7 +33,7 @@
     </div>
 </div>
 
-<div>
+<div style="margin-right:5%">
     לא רשום?  <a asp-action="Register">לחץ כאן </a> כדי להירשם
 </div>
 

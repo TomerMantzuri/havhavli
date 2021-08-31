@@ -5,35 +5,27 @@
 }
 
 <h1 class="text-center">עגלת הקניות שלי</h1>
-<canvas id="myCanvas" width="200" height="100" style="border:1px solid #000000;">
-</canvas>
-<script>
-var c = document.getElementById("myCanvas");
-var ctx = c.getContext("2d");
-ctx.font = "30px Arial";
-    ctx.strokeText("עגלת הקניות שלי", 50, 10);
-</script>
-<br />
-<br />
 
+<br />
+<br />
 
 <form asp-action="Search">
     <input name="query" placeholder="חפש מוצר" />
     <input type="submit" value="🔍" class="btn btn-outline-dark" />
 </form>
 
-<table class="table-striped styleTable">
+<table class="table styleTable">
     <thead>
         <tr>
-            <th><h1>תמונה</h1></th>
+            <th><h2>תמונה</h2></th>
             <th>
-                <h1>מוצר</h1>
+                <h2>מוצר</h2>
             </th>
             <th>
-                <h1>מחיר</h1>
+                <h2>מחיר</h2>
             </th>
             <th>
-                <h1>כמות</h1>
+                <h2>כמות</h2>
             </th>
     </thead>
     <tbody>
@@ -52,7 +44,7 @@ ctx.font = "30px Arial";
                 <td>
                     @Html.DisplayFor(modelItem => item.QuantityInCart)
                 </td>
-                <td>
+                <td style="display:flex">
                     <form class="formStyle" asp-controller="ShoppingCarts" asp-action="EditQuantity" asp-route-id="@item.Id" method="post">
                         <select class="choiceStyle" name="quantity" id="quantity" required>
                             <option value="1">1</option>
@@ -63,8 +55,7 @@ ctx.font = "30px Arial";
                         </select>
                         <button type="submit" value="AddToCart" class="btn btn-dark">עדכן</button>
                     </form>
-                </td>
-                <td>
+                    <br />
                     <form asp-controller="ShoppingCarts" asp-action="RemoveProduct" asp-route-id="@item.Id" method="post">
                         <button class="btn btn-danger" type="submit">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
@@ -74,12 +65,15 @@ ctx.font = "30px Arial";
                         </button>
                     </form>
                 </td>
+                
             </tr>
         }
 
     </tbody>
+    <div>
     <thead>
-        <tr>
+
+        <tr class="total-price">
             <th>
                 @Html.DisplayNameFor(model => model.TotalPrice)
             </th>
@@ -88,6 +82,7 @@ ctx.font = "30px Arial";
             </th>
         </tr>
     </thead>
+    </div>
 </table>
 
 @if (Model.Products.Count > 0)
@@ -95,7 +90,7 @@ ctx.font = "30px Arial";
     <button class="btn btn-success" data-toggle="modal" data-target="#pay">שלם</button>
 }
 <div class="modal" id="pay" tabindex="-1" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-    <div class="container text-center" id="payment">
+    <div class="container-payment" id="payment">
         <div class="creditCardInfo">
             <form>
                 <br />
@@ -197,6 +192,7 @@ ctx.font = "30px Arial";
                 <hr />
                 <div class="submitBtn">
                     <input class="btn btn-success" value="שלם" type="submit" asp-controller="ShoppingCarts" asp-action="AfterPayment" />
+                    <a class="btn btn-dark text-center" href="/ShoppingCarts/MyCart">חזרה לדף הקודם</a>
                 </div>
             </form>
         </div>
