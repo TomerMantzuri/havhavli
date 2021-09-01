@@ -37,5 +37,7 @@ namespace havhavli.Models
         public int SupplierID { get; set; }
         public Supplier supplier { get; set; }
         public int QuantityInCart { get; set; } = 0;
+        [Display(Name = "תמונה")]
+        public ProductImage productImage { get; set; }
     }
 }

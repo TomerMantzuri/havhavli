@@ -201,6 +201,20 @@ namespace havhavli.Controllers
                 ViewBag.CurrentTotalProducts = ProductStatistics;
                 return View();
         }
+
+
+        public async Task<IActionResult> JoinSearch(string productName, string price)
+        {
+            ViewData["Categoriess"] = new SelectList(_context.category, nameof(category.Id), nameof(category.name));
+            float FloatPrice = Int32.Parse(price);
+            var products = from pro in _context.Product select pro;
+            products = products.Where(x => x.Name.Contains(productName));
+            products = products.Where(x => x.Price <= FloatPrice);
+
+             var query = from pro in products join image in _context.ProductImage on pro.Id equals image.ProductId select new ProductJoin(pro, image);
+
+             return View("Index", await query.ToListAsync());
+        }
     }
 }
 
@@ -213,4 +227,12 @@ public class Statistic
         Key = key;
         Values = values;
     }
+}
+
+public class ProductJoin
+{
+    public Product product{ get; set; }
+    public ProductImage productimage { get; set; }
+
+    public ProductJoin(Product pro, ProductImage Image) { this.product = pro; this.productimage = Image; }
 }

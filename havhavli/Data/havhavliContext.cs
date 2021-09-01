@@ -26,5 +26,7 @@ namespace havhavli.Data
 
         public DbSet<havhavli.Models.ShoppingCart> ShoppingCart { get; set; }
 
+        public DbSet<havhavli.Models.ProductImage> ProductImage { get; set; }
+
     }
 }

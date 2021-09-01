@@ -2,15 +2,17 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using havhavli.Data;
 
 namespace havhavli.Migrations
 {
     [DbContext(typeof(havhavliContext))]
-    partial class havhavliContextModelSnapshot : ModelSnapshot
+    [Migration("20210901072954_Image")]
+    partial class Image
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -84,9 +86,6 @@ namespace havhavli.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Image")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
@@ -282,7 +281,7 @@ namespace havhavli.Migrations
             modelBuilder.Entity("havhavli.Models.ProductImage", b =>
                 {
                     b.HasOne("havhavli.Models.Product", "product")
-                        .WithOne("productImage")
+                        .WithOne("Image")
                         .HasForeignKey("havhavli.Models.ProductImage", "ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -303,7 +302,7 @@ namespace havhavli.Migrations
 
             modelBuilder.Entity("havhavli.Models.Product", b =>
                 {
-                    b.Navigation("productImage");
+                    b.Navigation("Image");
                 });
 
             modelBuilder.Entity("havhavli.Models.Supplier", b =>
