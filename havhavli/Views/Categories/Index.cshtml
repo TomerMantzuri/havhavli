@@ -4,17 +4,18 @@
     ViewData["Title"] = "קטגוריות";
 }
 
-<h1>קטגוריות</h1>
+<h1 class="text-center">קטגוריות</h1>
 
 <p>
     <a asp-action="Create">צור קטגוריה חדשה</a>
 </p>
 
 
-<form asp-action="Search">
-    <input name="query" id="query" autocomplete="off" />
-    <input type="submit" />
+<form asp-action="Search" class="search-form">
+    <input name="query" id="query" autocomplete="off" placeholder="חיפוש..." />
+    <input type="submit" value="🔍" />
 </form>
+
 <table class="table">
     <thead>
         <tr>

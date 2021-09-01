@@ -4,10 +4,10 @@
     ViewData["Title"] = "ערוך ספק";
 }
 
-<h1>ערוך פרטי ספק</h1>
+<h1 class="text-center">ערוך פרטי ספק</h1>
 <hr />
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-2">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id" />
@@ -33,8 +33,8 @@
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">חזור לרשימת ספקים</a>
+<div class="under-form">
+    <a asp-action="Index">חזור לרשימת הספקים</a>
 </div>
 
 @section Scripts {

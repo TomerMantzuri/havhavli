@@ -9,8 +9,8 @@ using havhavli.Data;
 namespace havhavli.Migrations
 {
     [DbContext(typeof(havhavliContext))]
-    [Migration("20210901130608_onto")]
-    partial class onto
+    [Migration("20210901162749_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

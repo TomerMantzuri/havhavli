@@ -4,12 +4,10 @@
     ViewData["Title"] = "הוסף סניף";
 }
 
-<h1>הוספה</h1>
-
-<h4>סניף</h4>
+<h1 class="text-center">הוספת סניף</h1>
 <hr />
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-2">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
@@ -34,13 +32,10 @@
             </div>
             <div class="form-group">
                 <input type="submit" value="הוסף" class="btn btn-primary" />
+                <a asp-action="Index">חזור לרשימת הסניפים</a>
             </div>
         </form>
     </div>
-</div>
-
-<div>
-    <a asp-action="Index">חזור אל רשימת הסניפים</a>
 </div>
 
 @section Scripts {

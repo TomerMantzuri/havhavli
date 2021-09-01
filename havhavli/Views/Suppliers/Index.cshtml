@@ -4,12 +4,12 @@
     ViewData["Title"] = "ספקים";
 }
 
-<h1>ספקים</h1>
+<h1 class="text-center">ספקים</h1>
 
 <p>
     <a asp-action="Create">הוסף ספק</a>
 </p>
-<form asp-action="Search">
+<form asp-action="Search" class="search-form">
     <input name="query" id="query" autocomplete="off" placeholder="חיפוש..." />
     <input type="submit" value="🔍" />
 </form>

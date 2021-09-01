@@ -119,6 +119,10 @@ body {
     font-weight: 900;
 }
 
+.col-md-2 {
+    margin-right: 15px;
+}
+
 .table-striped styleTable {
 display: flex;
 justify-content: space-between;
@@ -152,4 +156,28 @@ width: 800px;
 
 .container-products {
     padding-top: 15px;
+    margin-right: 35px;
+}
+
+.homepage {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.homeTopVideoWrapper, .video-container-main {
+    width: 100%;
+}
+
+.video-main {
+    width: 100%;
+}
+
+.search-form {
+    margin-bottom: 15px;
+}
+
+.under-form {
+    margin-right: 15px;
 }

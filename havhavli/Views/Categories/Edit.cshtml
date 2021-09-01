@@ -4,11 +4,11 @@
     ViewData["Title"] = "עריכה";
 }
 
-<h1>ערוך קטגוריה</h1>
+<h1 class="text-center">ערוך קטגוריה</h1>
 
 <hr />
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-2">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id" />
@@ -24,8 +24,8 @@
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">חזור לרשימת קטגוריות</a>
+<div class="under-form">
+    <a asp-action="Index">חזור לרשימת הקטגוריות</a>
 </div>
 
 @section Scripts {

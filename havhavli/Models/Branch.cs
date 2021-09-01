@@ -19,7 +19,6 @@ namespace havhavli.Models
         public String PhoneNumber { get; set; }
         [Required]
         [Display(Name = "כתובת")]
-        [RegularExpression(@"^[א-ת ]+$", ErrorMessage = "כתובת הסניף חייב להיות בעברית בלבד ")]
         public String Address { get; set; }
         [Required]
         [Display(Name = "שעות פעילות")]

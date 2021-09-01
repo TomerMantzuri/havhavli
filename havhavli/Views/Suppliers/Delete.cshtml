@@ -4,31 +4,30 @@
     ViewData["Title"] = "הסר ספק";
 }
 
-<h1>הסרת ספק</h1>
+<h1 class="text-center">הסרת ספק</h1>
 
-<h3>האם ברצונך להסיר ספק זה?</h3>
+<h3 class="text-center">האם ברצונך להסיר ספק זה?</h3>
 <div>
-    <h4>ספק</h4>
     <hr />
     <dl class="row">
-        <dt class = "col-sm-2">
+        <h4 class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Name)
-        </dt>
-        <dd class = "col-sm-10">
+        </h4>
+        <h5 class = "col-sm-10">
             @Html.DisplayFor(model => model.Name)
-        </dd>
-        <dt class = "col-sm-2">
+        </h5>
+        <h4 class = "col-sm-2">
             @Html.DisplayNameFor(model => model.ContactName)
-        </dt>
-        <dd class = "col-sm-10">
+        </h4>
+        <h5 class = "col-sm-10">
             @Html.DisplayFor(model => model.ContactName)
-        </dd>
-        <dt class = "col-sm-2">
+        </h5>
+        <h4 class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Phone)
-        </dt>
-        <dd class = "col-sm-10">
+        </h4>
+        <h5 class = "col-sm-10">
             @Html.DisplayFor(model => model.Phone)
-        </dd>
+        </h5>
     </dl>
     
     <form asp-action="Delete">
