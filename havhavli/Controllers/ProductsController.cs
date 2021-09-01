@@ -24,25 +24,25 @@ namespace havhavli.Controllers
         // GET: Products
         public async Task<IActionResult> Index()
         {
-            var havhavliContext = _context.Product.Include(p => p.category).Include(p => p.supplier);
+            var havhavliContext = _context.Product.Include(p => p.category).Include(p => p.supplier).Include(p=>p.productImage);
             return View(await havhavliContext.ToListAsync());
         }
 
         public async Task<IActionResult> Search(string query)
         {
-            var havhavliContext = _context.Product.Include(a => a.category).Include(p => p.supplier).Where(a => a.Name.Contains(query) || a.Description.Contains(query)||query==null || a.category.name.Contains(query));
+            var havhavliContext = _context.Product.Include(a => a.category).Include(p => p.supplier).Include(p => p.productImage).Where(a => a.Name.Contains(query) || a.Description.Contains(query)||query==null || a.category.name.Contains(query));
             return View("index",await havhavliContext.ToListAsync());
         }
 
         public async Task<IActionResult> Category(int id)
         {
-            var havhavliContext = _context.Product.Include(a => a.category).Where(a => a.categoryId == id);
+            var havhavliContext = _context.Product.Include(a => a.category).Include(p => p.productImage).Where(a => a.categoryId == id);
             return View("index", await havhavliContext.ToListAsync());
         }
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> SupplierProducts(int id)
         {
-            var havhavliContext = _context.Product.Include(a => a.supplier).Where(a => a.SupplierID == id);
+            var havhavliContext = _context.Product.Include(a => a.supplier).Include(p => p.productImage).Where(a => a.SupplierID == id);
             return View( await havhavliContext.ToListAsync());
         }
 
@@ -60,13 +60,14 @@ namespace havhavli.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Description,Quantity,Price,Image,categoryId,SupplierID")] Product product)
+        public async Task<IActionResult> Create([Bind("Id,Name,Description,Quantity,Price,categoryId,SupplierID")] Product product)
         {
             if (ModelState.IsValid)
             {
                 _context.Add(product);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Create", "ProductImages");
+
             }
             ViewData["categoryId"] = new SelectList(_context.Set<category>(), "Id", "Id", product.categoryId);
             ViewData["SupplierId"] = new SelectList(_context.Supplier, "Id", "Name", product.SupplierID);
@@ -97,7 +98,7 @@ namespace havhavli.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Description,Quantity,Price,Image,categoryId,SupplierID")] Product product)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Description,Quantity,Price,categoryId,SupplierID")] Product product)
         {
             if (id != product.Id)
             {

@@ -2,7 +2,7 @@
 
 namespace havhavli.Migrations
 {
-    public partial class Init : Migration
+    public partial class onto : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -101,7 +101,6 @@ namespace havhavli.Migrations
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Quantity = table.Column<int>(type: "int", nullable: false),
                     Price = table.Column<float>(type: "real", nullable: false),
-                    Image = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     categoryId = table.Column<int>(type: "int", nullable: false),
                     SupplierID = table.Column<int>(type: "int", nullable: false),
                     QuantityInCart = table.Column<int>(type: "int", nullable: false)
@@ -139,6 +138,26 @@ namespace havhavli.Migrations
                         name: "FK_ShoppingCart_User_UserId",
                         column: x => x.UserId,
                         principalTable: "User",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ProductImage",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ProductId = table.Column<int>(type: "int", nullable: false),
+                    Imge = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ProductImage", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_ProductImage_Product_ProductId",
+                        column: x => x.ProductId,
+                        principalTable: "Product",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -183,6 +202,12 @@ namespace havhavli.Migrations
                 column: "SupplierID");
 
             migrationBuilder.CreateIndex(
+                name: "IX_ProductImage_ProductId",
+                table: "ProductImage",
+                column: "ProductId",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
                 name: "IX_ProductShoppingCart_ProductsId",
                 table: "ProductShoppingCart",
                 column: "ProductsId");
@@ -198,6 +223,9 @@ namespace havhavli.Migrations
         {
             migrationBuilder.DropTable(
                 name: "BranchSupplier");
+
+            migrationBuilder.DropTable(
+                name: "ProductImage");
 
             migrationBuilder.DropTable(
                 name: "ProductShoppingCart");

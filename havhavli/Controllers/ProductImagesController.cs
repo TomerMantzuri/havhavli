@@ -19,36 +19,12 @@ namespace havhavli.Controllers
             _context = context;
         }
 
-        // GET: ProductImages
-        public async Task<IActionResult> Index()
-        {
-            var havhavliContext = _context.ProductImage.Include(p => p.product);
-            return View(await havhavliContext.ToListAsync());
-        }
-
-        // GET: ProductImages/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var productImage = await _context.ProductImage
-                .Include(p => p.product)
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (productImage == null)
-            {
-                return NotFound();
-            }
-
-            return View(productImage);
-        }
+     
 
         // GET: ProductImages/Create
         public IActionResult Create()
         {
-            ViewData["ProductId"] = new SelectList(_context.Product, "Id", "Name");
+            ViewData["ProductId"] = new SelectList(_context.Product.Where(a => a.productImage == null), "Id", "Name");
             return View();
         }
 
@@ -63,7 +39,7 @@ namespace havhavli.Controllers
             {
                 _context.Add(productImage);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Index", "Products");
             }
             ViewData["ProductId"] = new SelectList(_context.Product, "Id", "Name", productImage.ProductId);
             return View(productImage);
@@ -122,35 +98,6 @@ namespace havhavli.Controllers
             return View(productImage);
         }
 
-        // GET: ProductImages/Delete/5
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var productImage = await _context.ProductImage
-                .Include(p => p.product)
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (productImage == null)
-            {
-                return NotFound();
-            }
-
-            return View(productImage);
-        }
-
-        // POST: ProductImages/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            var productImage = await _context.ProductImage.FindAsync(id);
-            _context.ProductImage.Remove(productImage);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
-        }
 
         private bool ProductImageExists(int id)
         {

@@ -24,9 +24,6 @@ namespace havhavli.Models
         [Range(5, 800,ErrorMessage ="על המחיר להיות 5-800 שח")]
         [DataType(DataType.Currency,ErrorMessage ="אנא השתמש בספרות בלבד")]
         public float Price { get; set; }
-        [Display(Name = "תמונה")]
-        [DataType(DataType.ImageUrl,ErrorMessage ="קישור אינו תקין")]
-        public string Image { get; set; }
         [Required]
         [Display(Name = "קטגוריה")]
         public int categoryId { get; set; }
