@@ -209,12 +209,12 @@ namespace havhavli.Controllers
             ViewData["Categoriess"] = new SelectList(_context.category, nameof(category.Id), nameof(category.name));
             float FloatPrice = Int32.Parse(price);
             var products = from pro in _context.Product select pro;
-            products = products.Where(x => x.Name.Contains(productName));
+            products = products.Where(x => x.Name.Contains(productName)|| x.Description.Contains(productName));
             products = products.Where(x => x.Price <= FloatPrice);
 
              var query = from pro in products join image in _context.ProductImage on pro.Id equals image.ProductId select new ProductJoin(pro, image);
 
-             return View("Index", await query.ToListAsync());
+             return View("ProductsSearch", await query.ToListAsync());
         }
     }
 }

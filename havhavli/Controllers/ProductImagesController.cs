@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using havhavli.Data;
 using havhavli.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace havhavli.Controllers
 {
@@ -19,9 +20,11 @@ namespace havhavli.Controllers
             _context = context;
         }
 
-     
+
 
         // GET: ProductImages/Create
+        [Authorize(Roles = "Admin")]
+
         public IActionResult Create()
         {
             ViewData["ProductId"] = new SelectList(_context.Product.Where(a => a.productImage == null), "Id", "Name");
@@ -46,6 +49,8 @@ namespace havhavli.Controllers
         }
 
         // GET: ProductImages/Edit/5
+        [Authorize(Roles = "Admin")]
+
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
