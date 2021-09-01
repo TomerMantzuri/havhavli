@@ -109,7 +109,7 @@ namespace havhavli.Controllers
             if (product != null)
             {
                 cart.TotalPrice -= product.Price* product.QuantityInCart;
-                cart.Products.Remove(product);//Remove by amount
+                cart.Products.Remove(product);
             }
 
             _context.Attach<ShoppingCart>(cart);

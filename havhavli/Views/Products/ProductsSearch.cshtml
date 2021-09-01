@@ -1,19 +1,11 @@
-﻿@model IEnumerable<havhavli.Models.Product>
+﻿@using  havhavli.Controllers
+@model IEnumerable<ProductJoin>
 
 @{
     ViewData["Title"] = "מוצרי החנות";
 }
 
 <h1 class="text-center">מוצרי החנות</h1>
-@if (Context.User.IsInRole("Admin"))
-{
-
-    <p class="text-center">
-        <a class="text-center" asp-action="Create">הוסף מוצר</a>   | 
-        <a class="text-center" asp-controller="ProductImages" asp-action="create">מוצרים ללא תמונות - סיום הכנת מוצר</a>
-    </p>
-}
-
 
 <div class="text-center">
     <form class="formStyle" asp-controller="Products" asp-action="JoinSearch">
@@ -33,17 +25,17 @@
 
 <div class="container-products">
     <div class="row">
-        @foreach (var item in Model.Where(a => a.productImage != null))
+        @foreach (var item in Model as ICollection<ProductJoin>)
         {
             <div class="card col-3" style="width:auto; flex: 0 0 15%">
-                <img src="@item.productImage.Imge" class="card-img-top" alt="product image" style="max-width:300px; max-height:300px">
+                <img src="@item.productimage.Imge" class="card-img-top" alt="product image" style="max-width:300px; max-height:300px">
                 <div class="card-body">
-                    <h5 class="card-title">@item.Name</h5>
-                    <p class="card-text"> @item.Description</p>
-                    <p class="card-text"> @item.Price ש"ח</p>
+                    <h5 class="card-title">@item.product.Name</h5>
+                    <p class="card-text"> @item.product.Description</p>
+                    <p class="card-text"> @item.product.Price ש"ח</p>
                     @if (Context.User != null && Context.User.Claims != null && Context.User.Claims.Count() > 0)
                     {
-                        <form class="formStyle" asp-controller="ShoppingCarts" asp-action="AddToCart" asp-route-id="@item.Id" method="post">
+                        <form class="formStyle" asp-controller="ShoppingCarts" asp-action="AddToCart" asp-route-id="@item.product.Id" method="post">
                             <label class="text-dark text-center" for="quantity">כמות : </label><br />
                             <select class="choiceStyle" name="quantity" id="quantity" required>
                                 <option value="1">1</option>
@@ -61,14 +53,6 @@
                         <a class="btn btn-outline-success card-background" asp-area="" asp-controller="Users" asp-action="Login">הוסף לעגלת הקניות</a>
                     }
                 </div>
-                @if (Context.User.IsInRole("Admin"))
-                {
-                    <div>
-                        <a asp-action="Edit" asp-route-id="@item.Id">עריכת מוצר</a> |
-                        <a asp-action="Delete" asp-route-id="@item.Id">מחיקת מוצר</a>|
-                        <a asp-controller="ProductImages" asp-action="Edit" asp-route-id="@item.Id">עריכת תמונה</a>
-                    </div>
-                }
             </div>
         }
     </div>
