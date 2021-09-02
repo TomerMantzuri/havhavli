@@ -29,7 +29,7 @@ namespace havhavli.Controllers
         {
             return View();
         }
-        public IActionResult Contact()
+        public IActionResult Developers()
         {
             return View();
         }
