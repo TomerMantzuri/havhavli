@@ -81,7 +81,16 @@ namespace havhavli.Controllers
                 user.Cart.Products = new List<Product>();
             if (product.Carts == null)
                 product.Carts = new List<ShoppingCart>();
-
+            if (product.Quantity==0)
+            {
+                ViewData["cart"] = "מוצר אזל מהמלאי";
+                return View("MyCart", cart);
+            }
+            if (quantity > product.Quantity)
+            {
+                ViewData["cart"] = "מצטערים, אין מספיק במלאי";
+                return View("MyCart", cart);
+            }
             if (!(cart.Products.Contains(product) && product.Carts.Contains(cart)))
             {
                 product.QuantityInCart = quantity;
@@ -92,7 +101,7 @@ namespace havhavli.Controllers
                 _context.Update(product);
                 await _context.SaveChangesAsync();
             }
-            return RedirectToAction("Index", "Products");
+            return RedirectToAction(nameof(MyCart));
         }
  
             // POST: Carts/removeProduct/5
@@ -134,10 +143,16 @@ namespace havhavli.Controllers
                 user.Cart.Products = new List<Product>();
             if (product.Carts == null)
                 product.Carts = new List<ShoppingCart>();
+          
 
             if (product.QuantityInCart == quantity)
             {
                 return RedirectToAction(nameof(MyCart));
+            }
+            else if (quantity > product.Quantity)
+            {
+                ViewData["cart"] = "מצטערים, אין מספיק במלאי";
+                return View("MyCart",cart);
             }
             else
             {
