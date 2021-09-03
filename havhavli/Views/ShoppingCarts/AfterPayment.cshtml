@@ -1,17 +1,36 @@
 ﻿@model IEnumerable<havhavli.Models.ShoppingCart>
+    <!DOCTYPE html>
+    @{
+        ViewData["Title"] = "אישור תשלום";
+    }
 
-@{
-    ViewData["Title"] = "אישור תשלום";
-}
+    <html>
+    <body>
+        <div class="text-black-50 text-center">
+            <br />
+            <h3 class="text-center">התשלום התקבל בהצלחה</h3>
+            <br />
+            <h1 class="text-center">תודה שקנית אצלנו, מקווים לראותך שוב בקרוב</h1>
+            <br />
+            <br />
+
+            <canvas class="text-center" id="myCanvas" width="250" height="100"
+                    style="border:1px solid #d3d3d3;">
+                Your browser does not support the canvas element.
+            </canvas>
+            <br />
+            <br />
+            <a class="btn btn-dark text-center" href="/Home/index">חזרה לדף הבית</a>
+        </div>
+
+    </body>
+</html>
 
 
 
-<div class="text-black-50">
-    <br />
-    <h3 class="text-center">התשלום התקבל בהצלחה</h3>
-    <br />
-    <h1 class="text-center">תודה שקנית אצלנו, מקווים לראותך שוב בקרוב</h1>
-    <br />
-    <br />
-    <a class="btn btn-dark text-center" href="/Home/index">חזרה לדף הבית</a>
-</div>
+<script>
+    var canvas = document.getElementById("myCanvas");
+    var ctx = canvas.getContext("2d");
+    ctx.font = "40px Arial";
+    ctx.strokeText("תודה שקניתם!", 240, 50);
+</script>

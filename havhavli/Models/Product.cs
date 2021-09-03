@@ -33,7 +33,7 @@ namespace havhavli.Models
         [Required]
         public int SupplierID { get; set; }
         public Supplier supplier { get; set; }
-        public int QuantityInCart { get; set; } = 0;
+        public int QuantityInCart { get; set; }
         [Display(Name = "תמונה")]
         public ProductImage productImage { get; set; }
     }
