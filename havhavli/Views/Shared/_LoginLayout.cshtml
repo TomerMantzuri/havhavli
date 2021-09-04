@@ -18,8 +18,16 @@
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-light" asp-area="" asp-controller="Products" asp-action="Index">מוצרי החנות</a>
+                        <li class="nav-item dropdown">
+                            <a style="color: white" class="btn dropdown-toggle text-Light" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
+                                מוצרי החנות ‍
+                            </a>
+                            <ul class="dropdown-menu" style="background-color:black">
+                                <li class="text-center"><a class="dropdown-item; text-light" href="/Products/Category/1">מוצרים לכלבים</a></li>
+                                <li class="text-center"><a class="dropdown-item; text-light" href="/Products/Category/2">מוצרים לחתולים</a></li>
+                                <li class="text-center"><a class="dropdown-item; text-light" href="/Products/Category/3">מוצרים לדגים</a></li>
+                                <li class="text-center"><a class="dropdown-item; text-light" href="\Products\Index">כל המוצרים</a></li>
+                            </ul>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="About">אודותינו</a>

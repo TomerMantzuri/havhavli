@@ -177,7 +177,7 @@ namespace havhavli.Controllers
             ShoppingCart cart = _context.ShoppingCart.Include(db => db.Products).FirstOrDefault(x => x.UserId == user.Id);
             foreach(var item in cart.Products)
             {
-                item.Quantity--;
+                item.Quantity= item.Quantity - item.QuantityInCart;
                 _context.Update(item);
             }
             int i = cart.Products.RemoveAll(p => p.Id == p.Id);
